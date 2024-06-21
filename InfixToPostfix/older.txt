@@ -1,0 +1,69 @@
+/*
+    char *tokenPtr = strtok(infix," ");
+
+    for(int i=0; i<strlen(infix)*2; i++)
+    {
+        postfix[i]='\0';//initializing postfix with \0
+    }
+    char postfix[strlen(infix)*2];//spaces will be added to distinguish numbers
+
+void convertToPostfix(char *tokenPtr,char *postfix[])
+{
+    StackNodePtr topPtr=(StackNodePtr)malloc(sizeof(StackNode));
+    topPtr->data="("; // pushing a '(' in the base of the stack
+    topPtr->nextPtr=NULL;
+    int index=0;
+    char *popValue;
+
+    for(int i=0;!(isEmpty(topPtr)) && tokenPtr!=NULL ; i++)
+    {
+        if(isOperator(*tokenPtr)) //if tokenPtr = "Hello" *tokenPtr=tokenPtr[0]='H'
+        {
+            if(precedence(*tokenPtr, *topPtr->data))
+            {
+                popValue= pop(&topPtr);//If topPtr->data has same or higher precedence we pop it
+
+                if(*popValue!='(') //'(' are not present in postfix
+                {
+                    postfix[index]=popValue;
+                    index++;
+                }
+            }
+            push(&topPtr,tokenPtr); //We pass in the address of topPtr to change where it's
+                                            // pointing to
+        }
+        else if(*tokenPtr=='(')
+        {
+            push(&topPtr, "(");
+        }
+        else if(*tokenPtr==')')
+        {
+            while(*topPtr->data!='(')
+            {
+                popValue=pop(&topPtr);
+                postfix[index]=popValue;
+                index++;
+            }
+            pop(&topPtr);// will call it one more time to remove '('
+
+        }
+        else if(*tokenPtr=='$') //we have reached the end of infix array
+        {
+            while(!isEmpty(topPtr)) //the remaining operators will be popped and put in postfix
+            {
+                popValue=pop(&topPtr);
+                if(*popValue!='(')
+                {
+                    postfix[index++]=popValue;
+                }
+            }
+            break;
+        }
+        else //it is a Digit
+        {
+            postfix[index++]=tokenPtr;
+        }
+        tokenPtr=strtok(NULL," "); //= continue to parse the string from where the last token was found
+    }
+}
+ */

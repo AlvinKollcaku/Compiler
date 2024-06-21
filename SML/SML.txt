@@ -1,0 +1,44 @@
+The simple language contains:
+-Accumulator -> a special register in which info is put before Simple language uses it
+                in calculations or examines it
+
+-A word -> 4 digit signed decimal number
+-A word=SimpleLanguage Instruction
+        First 2 digits = operation code -> specify operation to be performed
+        Last 2 digits = operand -> Memory location to do the operation on
+-------------------------------------------------------------------------------------
+Operation Code  -> Meaning
+
+Input/Output
+READ 10 -> Read a word(representing a value) from keyboard into specific memory location
+WRITE 11 -> Write a word from a specific location in memory to the screen
+
+Load/Store operations
+LOAD 20 -> Load a word from a specific location in memory into the accumulator
+STORE 21 -> Store a word from the accumulator into a specific location in memory
+
+Arithmetic operations
+ADD 30 -> Add a word from a specific location in memory to the word in the accumulator
+            (the result is left in the accumulator)
+SUBTRACT 30 -> SUBTRACT a word from a specific location in memory to the word in the accumulator
+            (the result is left in the accumulator)
+DIVIDE 30 -> DIVIDE a word from a specific location in memory to the word in the accumulator
+            (the result is left in the accumulator)
+MULTIPLY 30 -> MULTIPLY a word from a specific location in memory to the word in the accumulator
+            (the result is left in the accumulator)
+
+Transfer-of-control operations:
+BRANCH 40 -> Branch to a specific location in memory
+BRANCHNEG 41 -> Branch to a specific location in memory if the accumulator is negative
+BRANCHZERO 42 -> Branch to a specific location in memory if the accumulator is zero
+HALT 43 -> Halt the program
+
+------------------------------------------------------------------------------------
+There are 4 registers used in the language simulator
+accumulator
+instructionCounter - will hold the current instruction number
+instructionRegister - will hold the current instruction (operationCode + operand)
+operationCode - will hold the first 2 digits of the instruction being executed
+operand - will hold the last 2 digits of the instruction being executed
+
+1)Before running SML program we load it into memory

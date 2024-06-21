@@ -1,0 +1,61 @@
+Simple language
+
+Each statement consists of a line number and a Simple instruction
+Line numbers must appear in ascending order
+Each instruction begins with one of the following commands:
+rem , input, let, print, goto, if...goto or end
+
+The language
+----------------------------------------------
+Command    |  Example statement     |   Description
+rem         50 rem this is a comment    Text following the command rem is for documentation.
+                                        It is ignored = no Assembly code is generated
+input       30 input x                  Display a question mark to prompt the user to enter a single
+                                        integer. Read that integer from the keyboard and store in x
+let         80 let u = 4*(j-7)          Assign to u the value of 4*(j-7). An arbitrarily complex infix
+                                        expression can appear to the right of the equal sign
+print       10 print w                  Display the value of single integer variable w
+goto        70 goto 45                  Transfer program control to line 45
+if..goto    35 if i==z goto 80          Compare i and z for equality and transger control to line 80
+                                        if the condition is true; otherwise, continue execution with the
+                                        next statement
+end         99 end                      Terminate program execution
+----------------------------------------------
+Additional Rules
+Simple language recognizes only lowercase letters
+A variable name is a single letter (document variables in rem statements)
+Simple uses only int variables
+Simple does not have variable declaration - merely mentioning a variable name declares the variable and initilzes it to 0
+Simple's syntax does not allow string manipulation(reading a string,writing a string,comparing strings, etc)
+The following relational and equality operators <,>,<=,>=,== or != are valid in if..goto statement
+---------------------------------------------------
+->The compiler will read a file containing the Simple program and will compile it into SML code
+and then writes it one instruction per line to a text file.
+->Next the Simpletron simulator loads the SML file into the Simpletron's 100-element array, executes
+the program and outputs the results to the screen and to a file to have a hard copy of the program.
+
+The compiler performs 2 passes of a Simple program to convert it to SML:
+1)The first pass constructs a symbol table where every line number,variable name and constant of
+the Simple program will be stored.
+SML code. The first pass also produces the corresponding SML instructions for each Simple statement, which
+may be incomplete if we a have a goto statement going to a line that has not been created yet.
+2)The second pass will take care of the unfinished instructions
+-----------------------------------------------------
+First Pass
+-----------
+1) Compiler reads the Simple programs first statement
+2) The compiler separates the line into its individual tokens
+    If a token is a line number a variable or constant it is placed in the symbol table
+    !Line number is placed in symbol table only if it's the first token
+
+
+-Compiler searches the symbolTable to determine the operand. The operation code is the command in simple language
+input = 10 (read)
+-When a goto statement is compiled with an unresolved reference, the SML instruction must be flagged to indicate that
+the compiler's SECOND PASS must complete the instruction
+-let statement will evaluate an arbitrarily complex infix arithmetic expression consisting of
+operators , single letter integer variables names , integer constants -> ! Expressions should seperate each operand and operator with space!
+
+
+
+

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include<string.h>
 #include<stdbool.h>
+#include <math.h>
 #include "CompilerHeader.h"
 
 void inputKeyword(char *tokenPtr)
@@ -21,13 +22,13 @@ void inputKeyword(char *tokenPtr)
 
         //printf("Inputed: %c\n",SymbolTable[SymbolTableIndex-1]);
 
-        SML[SmlInstructionCounter++]=1000+SmlVariableIndexCounter--;
+        SML[SmlInstructionCounter++]=10000+SmlVariableIndexCounter--;
         //1000 + the location for the referenced variable(which is the next token)
     }
     else
     {
         //We use its location in the symbol table
-        SML[SmlInstructionCounter++]=1000+line;
+        SML[SmlInstructionCounter++]=10000+line;
     }
 }
 
@@ -98,7 +99,6 @@ void conditionKeyword(char *tokenPtr)
         }
 
        handleOperators(Operators,Operands,tokenPtr);
-
     }
     else
     {
@@ -111,43 +111,39 @@ void conditionKeyword(char *tokenPtr)
 void letKeyword(char *tokenPtr)
 {
     //1) Put all symbols that are not in the symbol table
-    tokenPtr=strtok(NULL," "); //left variable //TODO check that it is a variable->lexical analyser
-
-    if(returns_SML_location_from_SymbolTable(*tokenPtr)==-1)
+    tokenPtr=strtok(NULL,"="); //variable part //TODO check that it is a variable->lexical analyser
+    int left_variable_location=returns_SML_location_from_SymbolTable(*tokenPtr);
+    if(left_variable_location==-1)
     {
         SymbolTable[SymbolTableIndex].symbol=*tokenPtr;
         SymbolTable[SymbolTableIndex].type='V';
         SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+        left_variable_location=SmlVariableIndexCounter+1;
     }
-    tokenPtr=strtok(NULL," "); // getting the equal sign //TODO check it
+    tokenPtr=strtok(NULL,"=");
+    strcat(tokenPtr,"$");
 
-    char *rightExpression[100];
-    //2)Will store the right side of the expression in a string array
-    for(int i=0;i<100;i++)
+    char * postfix[200];
+    for(int i=0;i<200;i++)
     {
-        rightExpression[i]="$";
+        postfix[i]="$";
     }
+    convertToPostfix(tokenPtr,postfix);
+    evaluatePostfixExpression2(postfix);
 
-    int index=0;
-    while(tokenPtr!=NULL)
+    puts("Postfix:");
+    for(int i=0; strcmp(postfix[i],"$")!=0;i++)
     {
-        tokenPtr=strtok(NULL," "); //Passing the equal sign to get to the expression
-        rightExpression[index++]=tokenPtr;
-        if(index>=100)
-        {
-            printf("Right expression in more than 100 tokens");
-            exit(1);
-        }
+        printf("%s ",postfix[i]);
     }
-
-    char * postfix[100];
+    puts("");
 }
 
 void handleOperators(char Operators[],char Operands[],char * tokenPtr)
 {
-    SML[SmlInstructionCounter++]=2000+ //1)loading first operand in accumulator
+    SML[SmlInstructionCounter++]=20000+ //1)loading first operand in accumulator
                                  returns_SML_location_from_SymbolTable(Operands[0]);
-    SML[SmlInstructionCounter++]=3100+ //2)Substracting second operand
+    SML[SmlInstructionCounter++]=31000+ //2)Substracting second operand
                                  returns_SML_location_from_SymbolTable(Operands[1]);
 
     //Now we deal with the goto part -> TODO check in syntax analyser if valid form
@@ -163,16 +159,15 @@ void handleOperators(char Operators[],char Operands[],char * tokenPtr)
             {
                 flags[SmlInstructionCounter]=atoi(tokenPtr);
                 if(Operators[1]=='=')
-                    SML[SmlInstructionCounter++]=4400; //Branch if accumulator is positive or 0
+                    SML[SmlInstructionCounter++]=44000; //Branch if accumulator is positive or 0
                 else
-                    SML[SmlInstructionCounter++]=4300;
+                    SML[SmlInstructionCounter++]=43000;
             }else
             {
                 if(Operators[1]=='=')
-                    SML[SmlInstructionCounter++]=4400+line;//Branch if accumulator is positive or 0
+                    SML[SmlInstructionCounter++]=44000+line;//Branch if accumulator is positive or 0
                 else
-                    SML[SmlInstructionCounter++]=4300+line;
-
+                    SML[SmlInstructionCounter++]=43000+line;
             }
         }else if(Operators[0]=='<')
         {
@@ -182,16 +177,15 @@ void handleOperators(char Operators[],char Operands[],char * tokenPtr)
             {
                 flags[SmlInstructionCounter]=atoi(tokenPtr);
                 if(Operators[1]=='=')
-                    SML[SmlInstructionCounter++]=4200; //Branch if accumulator is negative or 0
+                    SML[SmlInstructionCounter++]=42000; //Branch if accumulator is negative or 0
                 else
-                    SML[SmlInstructionCounter++]=4100;
+                    SML[SmlInstructionCounter++]=41000;
             }else
             {
                 if(Operators[1]=='=')
-                    SML[SmlInstructionCounter++]=4200+line;//Branch if accumulator is negative or 0
+                    SML[SmlInstructionCounter++]=42000+line;//Branch if accumulator is negative or 0
                 else
-                    SML[SmlInstructionCounter++]=4100+line;
-
+                    SML[SmlInstructionCounter++]=41000+line;
             }
         }else if(Operators[0]=='=' || Operators[0]=='!')
         {
@@ -201,22 +195,242 @@ void handleOperators(char Operators[],char Operands[],char * tokenPtr)
                 printf("Operator not of form == or !=");
                 exit(1);
             }
-
             int line=returns_LineNum_location_from_SymbolTable(tokenPtr);
             if(line==-1)
             {
                 flags[SmlInstructionCounter]=atoi(tokenPtr);
                 if(Operators[0]=='=')
-                    SML[SmlInstructionCounter++]=4500; //Branch if accumulator is 0
+                    SML[SmlInstructionCounter++]=45000; //Branch if accumulator is 0
                 else
-                    SML[SmlInstructionCounter++]=4600;//Branch if accumulator is NOT 0
+                    SML[SmlInstructionCounter++]=46000;//Branch if accumulator is NOT 0
             }else
             {
                 if(Operators[0]=='=')
-                    SML[SmlInstructionCounter++]=4500+line;//Branch if accumulator is negative or 0
+                    SML[SmlInstructionCounter++]=45000+line;//Branch if accumulator is negative or 0
                 else
-                    SML[SmlInstructionCounter++]=4600+line;
+                    SML[SmlInstructionCounter++]=46000+line;
             }
         }
 }
 
+void evaluatePostfixExpression2(char *expr[])
+{
+    PostfixPtr topPtr=NULL;
+    char * pend;// Character end pointer  -> for strof
+
+    for(int i=0; strcmp(expr[i], "$") != 0; i++)
+    {
+        if(isVariable(expr[i]))
+        {
+            printf("%c is variable\n", *expr[i]);
+            if(returns_SML_location_from_SymbolTable(*expr[i])==-1)
+            {
+                SymbolTable[SymbolTableIndex].symbol=(char)*expr[i];
+                SymbolTable[SymbolTableIndex].type='V';
+                SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+            }
+            pushPostfix(&topPtr,returns_SML_location_from_SymbolTable(*expr[i]));
+        }else if(isOperator(*expr[i]))
+        {
+            printf("%c is operator\n",*expr[i]);
+            //if we have an operator pop last 2 digits in stack to do the calculation
+            int v2=popPostfix(&topPtr); //second operator address
+            int v1=popPostfix(&topPtr); //first operator address
+
+            reorganizeStack(v1,v2,*expr[i], isVariableInSymbolTable(v1)&& isVariableInSymbolTable(v2));
+        }
+        else //It is a constant -> put it into the symbol table if its not there
+        // and push the location in the stack
+        {
+            printf("%lf is constant\n", strtof(expr[i], &pend));
+            int resultLocation= returns_Constant_location_from_SymbolTable(expr[i]);
+            if(resultLocation==-1)
+            {
+                SymbolTable[SymbolTableIndex].symbol=strtof(expr[i], &pend);
+                SymbolTable[SymbolTableIndex].type='C';
+                SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                resultLocation=SmlVariableIndexCounter+1;
+                SML[SmlVariableIndexCounter+1]=strtof(expr[i], &pend);
+            }
+            pushPostfix(&topPtr,resultLocation);
+        }
+    }
+}
+
+void pushPostfix(PostfixPtr *topPtr, int value)
+{
+    PostfixPtr newNode=(PostfixPtr)malloc(sizeof(Postfix));
+
+    if(newNode!=NULL)
+    {
+        newNode->address=value;
+        newNode->nextPtr=*topPtr;
+        *topPtr=newNode;
+    }
+    else
+        printf("%d not inserted. No memory available.\n",value);
+}
+
+int popPostfix(PostfixPtr *topPtr)
+{
+    PostfixPtr tmp=*topPtr;
+    int popValue=(*topPtr)->address;
+    *topPtr=(*topPtr)->nextPtr;
+    free(tmp);
+
+    return popValue;
+}
+
+void reorganizeStack(int a1,int a2,char operator,bool isVariableIncluded)
+{
+    /*
+     1)Put the load and add/sub.. operations in SML
+     2)Put the result of SML[a1] operator SML[a2] into the symbol table as new constant with
+     a location in the SML array (resultLocation)
+     3)STORE resultLocation
+     */
+    switch(operator)
+    {
+        double result=0;
+        char str[50];
+        int resultLocation;
+        case '+':
+            SML[SmlInstructionCounter++]=20000+a1; //LOAD a1
+            SML[SmlInstructionCounter++]=30000+a2;//ADD a2 ->Now the result is in the accumulator
+
+            if(isVariableIncluded)//the result will be stored in the next free spot
+            {
+                SML[SmlInstructionCounter++]=21000+SmlVariableIndexCounter;
+                SmlVariableIndexCounter--;
+            }else
+            {
+                result=SML[a1]+SML[a2];
+                snprintf(str, sizeof(str), "%f", result);//turns float to string
+                resultLocation= returns_Constant_location_from_SymbolTable(str);
+                if(resultLocation==-1)
+                {
+                    SymbolTable[SymbolTableIndex].symbol=result;
+                    SymbolTable[SymbolTableIndex].type='C';
+                    SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                    resultLocation=SmlVariableIndexCounter+1;
+                }
+                SML[SmlInstructionCounter++]=21000+resultLocation; //Store in the next free spot
+            }
+            break;
+        case '-':
+            SML[SmlInstructionCounter++]=20000+a1; //LOAD a1
+            SML[SmlInstructionCounter++]=31000+a2;//SUBTRACT a2
+            if(isVariableIncluded)//the result will be stored in the next free spot
+            {
+                SML[SmlInstructionCounter++]=21000+SmlVariableIndexCounter;
+                SmlVariableIndexCounter--;
+            }else
+            {
+                result=SML[a1]-SML[a2];
+                snprintf(str, sizeof(str), "%f", result);//turns float to string
+                resultLocation= returns_Constant_location_from_SymbolTable(str);
+                if(resultLocation==-1)
+                {
+                    SymbolTable[SymbolTableIndex].symbol=result;
+                    SymbolTable[SymbolTableIndex].type='C';
+                    SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                    resultLocation=SmlVariableIndexCounter+1;
+                }
+                SML[SmlInstructionCounter++]=21000+resultLocation; //Store in the next free spot
+            }
+            break;
+        case '*':
+            SML[SmlInstructionCounter++]=20000+a1; //LOAD a1
+            SML[SmlInstructionCounter++]=33000+a2;//MULTIPLY a2
+            if(isVariableIncluded)//the result will be stored in the next free spot
+            {
+                SML[SmlInstructionCounter++]=21000+SmlVariableIndexCounter;
+                SmlVariableIndexCounter--;
+            }else
+            {
+                result=SML[a1]*SML[a2];
+                snprintf(str, sizeof(str), "%f", result);//turns float to string
+                resultLocation= returns_Constant_location_from_SymbolTable(str);
+                if(resultLocation==-1)
+                {
+                    SymbolTable[SymbolTableIndex].symbol=result;
+                    SymbolTable[SymbolTableIndex].type='C';
+                    SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                    resultLocation=SmlVariableIndexCounter+1;
+                }
+                SML[SmlInstructionCounter++]=21000+resultLocation; //Store in the next free spot
+            }
+            break;
+        case '/':
+            SML[SmlInstructionCounter++]=20000+a1; //LOAD a1
+            SML[SmlInstructionCounter++]=32000+a2;//DIV a2
+            if(isVariableIncluded)//the result will be stored in the next free spot
+            {
+                SML[SmlInstructionCounter++]=21000+SmlVariableIndexCounter;
+                SmlVariableIndexCounter--;
+            }else
+            {
+                result=SML[a1]/SML[a2];
+                snprintf(str, sizeof(str), "%f", result);//turns float to string
+                resultLocation= returns_Constant_location_from_SymbolTable(str);
+                if(resultLocation==-1)
+                {
+                    SymbolTable[SymbolTableIndex].symbol=result;
+                    SymbolTable[SymbolTableIndex].type='C';
+                    SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                    resultLocation=SmlVariableIndexCounter+1;
+                }
+                SML[SmlInstructionCounter++]=21000+resultLocation; //Store in the next free spot
+            }
+            break;
+        case '%':
+            SML[SmlInstructionCounter++]=20000+a1; //LOAD a1
+            SML[SmlInstructionCounter++]=34000+a2;//REMAINDER a2
+
+            if(isVariableIncluded)//the result will be stored in the next free spot
+            {
+                SML[SmlInstructionCounter++]=21000+SmlVariableIndexCounter;
+                SmlVariableIndexCounter--;
+            }else
+            {
+                result=(int)SML[a1]%(int)SML[a2];
+                snprintf(str, sizeof(str), "%f", result);//turns float to string
+                resultLocation= returns_Constant_location_from_SymbolTable(str);
+                if(resultLocation==-1)
+                {
+                    SymbolTable[SymbolTableIndex].symbol=result;
+                    SymbolTable[SymbolTableIndex].type='C';
+                    SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                    resultLocation=SmlVariableIndexCounter+1;
+                }
+                SML[SmlInstructionCounter++]=21000+resultLocation; //Store in the next free spot
+            }
+            break;
+        case '^':
+            SML[SmlInstructionCounter++]=20000+a1; //LOAD a1
+            SML[SmlInstructionCounter++]=35000+a2;//EXPONENTIATION a2
+
+            if(isVariableIncluded)//the result will be stored in the next free spot
+            {
+                SML[SmlInstructionCounter++]=21000+SmlVariableIndexCounter;
+                SmlVariableIndexCounter--;
+            }else
+            {
+                result=pow(SML[a1],SML[a2]);
+                snprintf(str, sizeof(str), "%f", result);//turns float to string
+                resultLocation= returns_Constant_location_from_SymbolTable(str);
+                if(resultLocation==-1)
+                {
+                    SymbolTable[SymbolTableIndex].symbol=result;
+                    SymbolTable[SymbolTableIndex].type='C';
+                    SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
+                    resultLocation=SmlVariableIndexCounter+1;
+                }
+                SML[SmlInstructionCounter++]=21000+resultLocation; //Store in the next free spot
+            }
+            break;
+        default:
+            printf("Not valid operator");
+            exit(1);
+    }
+}

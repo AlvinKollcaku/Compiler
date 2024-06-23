@@ -38,6 +38,9 @@ void convertToPostfix(char *infix,char *postfix2[]) {
                 number[numIndex] = '\0';
                 postfix2[tokenIndex] = (char *) malloc(sizeof(char) * (strlen(number) + 1));
                 strcpy(postfix2[tokenIndex++], number);
+            }else if(isalpha(infix[i]))//This is for the compiler part to put the variables in
+            {
+                postfix2[tokenIndex++]= charToString(infix[i]);
             }
                 // If the current character is an operator
             else if (isOperator(infix[i])) {
@@ -80,7 +83,6 @@ void convertToPostfix(char *infix,char *postfix2[]) {
                 }
                 break;
             }
-
     }
 }
 
@@ -169,7 +171,7 @@ void printStack(StackNodePtr topPtr)
 double evaluatePostfixExpression(char *expr[])
 {
     StackNode2Ptr topPtr2=NULL;
-    // Character end pointer  -> for strof
+    // Character end pointer  -> for strof which is used to convert a string to float
     char* pend;
 
     for(int i=0; strcmp(expr[i], "$") != 0; i++)

@@ -5,7 +5,7 @@
 #include "CompilerHeader.h"
 #include "C:\Users\alvin\OneDrive\Desktop\MiniCompilerFinal\InfixToPostfix\InfixHeader.h"
 
-int SML[1000]={0};// will hold the SML program
+double SML[1000]={0};// will hold the SML program
  int SmlInstructionCounter=0;
  int SmlVariableIndexCounter=999; //TODO check if SMLInstrcutioncounter > SMLVairableIndexCounter -> raise "out of memory error"
  int flags[1000]; //flags array has the same size as SML because the index of the incomplete instruction
@@ -14,7 +14,7 @@ int SML[1000]={0};// will hold the SML program
  struct tableEntry SymbolTable[2000];
  int SymbolTableIndex=0;
 
-int main4()
+int main()
 {
     for(int i=0; i<1000; i++)
         /*goto(x) will store x since we do not have x in the symbol table yet
@@ -98,8 +98,8 @@ int main4()
     fclose(infile);
 
     printSymbolTable(SymbolTable,SymbolTableIndex);
-    printSML(SML);
-    printFlagsArray(15);
+    printSML();
+    printFlagsArray();
 
     return 0;
 }

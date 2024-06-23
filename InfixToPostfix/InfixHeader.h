@@ -32,12 +32,6 @@ typedef struct stackNode2
     struct stackNode2 * nextPtr;
 }StackNode2;
 
-typedef struct Postfix
-{
-    double data;
-    char type; //'V' for variable address and 'C' for constant
-}Postfix;
-
 typedef StackNode2 * StackNode2Ptr;
 
 void push2(StackNode2Ptr *topPtr, double value);

@@ -32,22 +32,32 @@ bool isConditionalOperator(char c)
     return c=='='||c=='>'||c=='<'||c=='!';
 }
 
-int returns_SML_location_from_SymbolTable(char  Symbol)
+int returns_SML_location_from_SymbolTable(char Symbol) //this is for variables
 {
-    for(int i=0; i<=SymbolTableIndex; i++)
+    for(int i=0; i<SymbolTableIndex; i++)
     {
-        if(Symbol==SymbolTable[i].symbol)
+        if(Symbol==(char)SymbolTable[i].symbol)
             return SymbolTable[i].location;
     }
     return -1;
 }
 //Using another function since line numbers can be double digits and strings need to
 //be used with atoi() --> atoi("A")=0 Problem!
-int returns_LineNum_location_from_SymbolTable(char* Symbol)
+int returns_LineNum_location_from_SymbolTable(char* Symbol) //this is for line numbers
 {
-    for(int i=0; i<=SymbolTableIndex; i++)
+    for(int i=0; i<SymbolTableIndex; i++)
     {
-        if(atoi(Symbol)==SymbolTable[i].symbol)
+        if(atoi(Symbol)==(int)SymbolTable[i].symbol && SymbolTable[i].type=='L')
+            return SymbolTable[i].location;
+    }
+    return -1;
+}
+
+int returns_Constant_location_from_SymbolTable(char * constant)
+{
+    for(int i=0; i<SymbolTableIndex; i++)
+    {
+        if(atoi(constant)==SymbolTable[i].symbol && SymbolTable[i].type=='C')
             return SymbolTable[i].location;
     }
     return -1;
@@ -60,9 +70,12 @@ void printSymbolTable()
     for(int i=0; i<SymbolTableIndex; i++)
     {
         if(SymbolTable[i].type=='L')
-            printf("%d\t %c\t %d\n",SymbolTable[i].symbol,SymbolTable[i].type,SymbolTable[i].location);
+            printf("%.0lf\t %c\t %d\n",SymbolTable[i].symbol,SymbolTable[i].type,SymbolTable[i].location);
+        else if(SymbolTable[i].type=='V')
+            printf("%c\t %c\t %d\n",(char)SymbolTable[i].symbol,SymbolTable[i].type,SymbolTable[i].location);
         else
-            printf("%c\t %c\t %d\n",SymbolTable[i].symbol,SymbolTable[i].type,SymbolTable[i].location);
+            printf("%.2lf\t %c\t %d\n",SymbolTable[i].symbol,SymbolTable[i].type,SymbolTable[i].location);
+
     }
 }
 
@@ -72,22 +85,36 @@ void printSML()
     puts("-----------------------------------");
     puts("Printing the SML program");
 
-    for(int i=0; i<100; i++)
+    for(int i=0; i<SymbolTableIndex; i++)
     {
-        printf("%d\n",SML[i]);
         if(SML[i]==0)
             break;
+        printf("%.0lf\n",SML[i]);
     }
-
+    printf("Variables and constants\n");
+    for(int i=SmlVariableIndexCounter+1;i<1000;i++)
+    {
+        printf("%.1lf\n",SML[i]);
+    }
 }
 
-void printFlagsArray(int size)
+void printFlagsArray()
 {
     puts("Flags array");
-    for(int i=1;i<=size;i++)
+    for(int i=1;i<=SymbolTableIndex;i++)
     {
         printf("%d ",flags[i]);
-        if(i%5==0)
+        if(i%10==0)
             puts("");
     }
+}
+
+bool isVariableInSymbolTable(int address)
+{
+    for(int i=0;i<SymbolTableIndex;i++)
+    {
+        if(SymbolTable[i].location==address)
+            return true;
+    }
+    return false;
 }

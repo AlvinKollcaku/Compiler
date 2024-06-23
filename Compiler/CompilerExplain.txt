@@ -57,5 +57,13 @@ the compiler's SECOND PASS must complete the instruction
 operators , single letter integer variables names , integer constants -> ! Expressions should seperate each operand and operator with space!
 
 
+5 rem sum 1 to x
+10 input x
+15 input x
+20 input y
+25 if x > y goto 20
+30 end
 
+Modifications:
+Use hash map as symbol table for fast retrieval of locations
 

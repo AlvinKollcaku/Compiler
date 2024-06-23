@@ -12,13 +12,13 @@
 
 struct tableEntry
 {
-    int symbol;//ASCII value of var, constant or line num
+    double symbol;//ASCII value of var, constant or line num
     char type;//'C'=constant 'V'=variable 'L'=line number
     int location;//0 to 99 -> Simpletrons memory location associated with the symbol
     //char[20] command;
 };
 
-extern int SML[1000];// will hold the SML program
+extern double SML[1000];// will hold the SML program
 extern int SmlInstructionCounter;
 extern int SmlVariableIndexCounter; //TODO check if SMLInstrcutioncounter > SMLVairableIndexCounter -> raise "out of memory error"
 extern int flags[1000]; //flags array has the same size as SML because the index of the incomplete instruction
@@ -26,6 +26,14 @@ extern int flags[1000]; //flags array has the same size as SML because the index
 
 extern struct tableEntry SymbolTable[2000];
 extern int SymbolTableIndex;
+
+typedef struct Postfix
+{
+    int address;
+    struct Postfix * nextPtr;
+}Postfix;
+
+typedef struct Postfix * PostfixPtr;
 
 void printSML();
 bool isKeyword(char *str);
@@ -38,9 +46,16 @@ void conditionKeyword(char *tokenPtr);
 bool isConditionalOperator(char c);
 void printSymbolTable();
 int returns_LineNum_location_from_SymbolTable(char* Symbol);
-void printFlagsArray(int size);
+void printFlagsArray();
 void letKeyword(char *tokenPtr);
 void handleOperators(char Operators[],char Operands[],char * tokenPtr);
 void convertToPostfix(char *infix,char *postfix2[]);
+void evaluatePostfixExpression2(char *expr[]);
+bool isOperator(char  c);
+void pushPostfix(PostfixPtr *topPtr, int value);
+int popPostfix(PostfixPtr *topPtr);
+void reorganizeStack(int a1,int a2,char operator,bool isVariableIncluded);
+int returns_Constant_location_from_SymbolTable(char * constant);
+bool isVariableInSymbolTable(int address);
 
 #endif //MINICOMPILERFINAL_COMPILERHEADER_H

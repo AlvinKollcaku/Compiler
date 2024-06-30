@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "SML_header.h"
 
-int main4()
+int main2()
 {
     printf("***          Welcome to the Simple Language           ***\n\n"
            "***Please enter your program one instruction ***\n"

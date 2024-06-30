@@ -15,4 +15,5 @@ add_executable(MiniCompilerFinal
         Compiler/CompilerHeader.h
         Compiler/CompilerMain.c
         Compiler/Keywords.c
+        Compiler/KeywordHelper.c
 )

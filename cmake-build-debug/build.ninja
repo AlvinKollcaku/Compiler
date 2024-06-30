@@ -97,6 +97,12 @@ build CMakeFiles/MiniCompilerFinal.dir/Compiler/Keywords.c.obj: C_COMPILER__Mini
   OBJECT_DIR = CMakeFiles\MiniCompilerFinal.dir
   OBJECT_FILE_DIR = CMakeFiles\MiniCompilerFinal.dir\Compiler
 
+build CMakeFiles/MiniCompilerFinal.dir/Compiler/KeywordHelper.c.obj: C_COMPILER__MiniCompilerFinal_unscanned_Debug C$:/Users/alvin/OneDrive/Desktop/MiniCompilerFinal/Compiler/KeywordHelper.c || cmake_object_order_depends_target_MiniCompilerFinal
+  DEP_FILE = CMakeFiles\MiniCompilerFinal.dir\Compiler\KeywordHelper.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\MiniCompilerFinal.dir
+  OBJECT_FILE_DIR = CMakeFiles\MiniCompilerFinal.dir\Compiler
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target MiniCompilerFinal
@@ -105,7 +111,7 @@ build CMakeFiles/MiniCompilerFinal.dir/Compiler/Keywords.c.obj: C_COMPILER__Mini
 #############################################
 # Link the executable MiniCompilerFinal.exe
 
-build MiniCompilerFinal.exe: C_EXECUTABLE_LINKER__MiniCompilerFinal_Debug CMakeFiles/MiniCompilerFinal.dir/SML/SML_main.c.obj CMakeFiles/MiniCompilerFinal.dir/SML/SML_macros.c.obj CMakeFiles/MiniCompilerFinal.dir/SML/SML_functions.c.obj CMakeFiles/MiniCompilerFinal.dir/InfixToPostfix/InfixMain.c.obj CMakeFiles/MiniCompilerFinal.dir/InfixToPostfix/InfixFunctions.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerFunctions.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerMain.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/Keywords.c.obj
+build MiniCompilerFinal.exe: C_EXECUTABLE_LINKER__MiniCompilerFinal_Debug CMakeFiles/MiniCompilerFinal.dir/SML/SML_main.c.obj CMakeFiles/MiniCompilerFinal.dir/SML/SML_macros.c.obj CMakeFiles/MiniCompilerFinal.dir/SML/SML_functions.c.obj CMakeFiles/MiniCompilerFinal.dir/InfixToPostfix/InfixMain.c.obj CMakeFiles/MiniCompilerFinal.dir/InfixToPostfix/InfixFunctions.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerFunctions.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerMain.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/Keywords.c.obj CMakeFiles/MiniCompilerFinal.dir/Compiler/KeywordHelper.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MiniCompilerFinal.dir

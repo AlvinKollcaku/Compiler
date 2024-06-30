@@ -1,11 +1,13 @@
 #define READ 10
 #define WRITE 11
+#define READ_STRING 12
+#define WRITE_STRING 13
 
 #define LOAD 20
 #define STORE 21
 
 #define ADD 30
-#define SUBSTRACT 31
+#define SUBTRACT 31
 #define DIVIDE 32
 #define MULTIPLY 33
 #define REMAINDER 34

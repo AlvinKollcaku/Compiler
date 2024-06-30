@@ -12,7 +12,7 @@ bool isKeyword(char *str)
 
 bool isVariable(char *var)
 {
-    return *var>=97 && *var<=122;
+    return *var>=97 && *var<=122 && strlen(var)==1;
 }
 
 bool isConstant(const char* str) {
@@ -32,12 +32,22 @@ bool isConditionalOperator(char c)
     return c=='='||c=='>'||c=='<'||c=='!';
 }
 
-int returns_SML_location_from_SymbolTable(char Symbol) //this is for variables
+int returns_SML_location_from_SymbolTable(char * Symbol) //this is for variables
 {
-    for(int i=0; i<SymbolTableIndex; i++)
+    if(isVariable(Symbol))
     {
-        if(Symbol==(char)SymbolTable[i].symbol)
-            return SymbolTable[i].location;
+        for(int i=0; i<SymbolTableIndex; i++)
+        {
+            if(*Symbol==(char)SymbolTable[i].symbol)
+                return SymbolTable[i].location;
+        }
+    }else
+    {
+        for(int i=0; i<SymbolTableIndex; i++)
+        {
+            if(atoi(Symbol)==SymbolTable[i].symbol && SymbolTable[i].type=='C')
+                return SymbolTable[i].location;
+        }
     }
     return -1;
 }
@@ -53,11 +63,11 @@ int returns_LineNum_location_from_SymbolTable(char* Symbol) //this is for line n
     return -1;
 }
 
-int returns_Constant_location_from_SymbolTable(char * constant)
+int returns_LineNum_location_from_SymbolTable2(int Symbol) //this is for line numbers
 {
     for(int i=0; i<SymbolTableIndex; i++)
     {
-        if(atoi(constant)==SymbolTable[i].symbol && SymbolTable[i].type=='C')
+        if(Symbol==(int)SymbolTable[i].symbol && SymbolTable[i].type=='L')
             return SymbolTable[i].location;
     }
     return -1;
@@ -85,16 +95,16 @@ void printSML()
     puts("-----------------------------------");
     puts("Printing the SML program");
 
-    for(int i=0; i<SymbolTableIndex; i++)
+    for(int i=0; i<=SmlInstructionCounter; i++)
     {
         if(SML[i]==0)
             break;
         printf("%.0lf\n",SML[i]);
     }
-    printf("Variables and constants\n");
+    printf("Variables and constants\nLocation\n");
     for(int i=SmlVariableIndexCounter+1;i<1000;i++)
     {
-        printf("%.1lf\n",SML[i]);
+        printf("%d : %.1lf\n",i,SML[i]);
     }
 }
 
@@ -113,8 +123,37 @@ bool isVariableInSymbolTable(int address)
 {
     for(int i=0;i<SymbolTableIndex;i++)
     {
-        if(SymbolTable[i].location==address)
+        if(SymbolTable[i].location==address && SymbolTable[i].type=='V')
             return true;
     }
     return false;
+}
+
+void completeInstructions()
+{
+    for(int i=0;i<1000;i++)
+    {
+        if(flags[i]!=-1)
+        {
+            int loc= returns_LineNum_location_from_SymbolTable2(flags[i]);
+            if(loc==-1)
+            {
+                printf("Goto to unknown line number.");
+                exit(1);
+            }else
+            {
+               // printf("SML instruction %d with goto location %d\n",i,loc);
+                SML[i]+=loc;
+            }
+        }
+    }
+}
+
+void checkCounters()
+{
+    if(SmlInstructionCounter>=SmlVariableIndexCounter)
+    {
+        printf("The inputted Simple program is too large for SML[1000]");
+        exit(1);
+    }
 }

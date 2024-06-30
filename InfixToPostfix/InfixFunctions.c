@@ -44,6 +44,7 @@ void convertToPostfix(char *infix,char *postfix2[]) {
             }
                 // If the current character is an operator
             else if (isOperator(infix[i])) {
+                //printf("About to handle %c\n",infix[i]);
                 if(precedence(infix[i], topPtr->data))
                 {
                     popValue=pop(&topPtr);//If topPtr->data has same or higher precedence we pop it
@@ -102,9 +103,14 @@ bool precedence(char operator1, char operator2)
         return false;
     }
 
-    if(operator1=='*'||operator1=='/')
+    if(operator2=='^')//highest precedence
+        return true;
+    else if(operator1=='^')
+        return false;
+
+    if(operator1=='*'||operator1=='/'||operator1=='%')
     {
-        if(operator2=='*'||operator2=='/') //same precedence
+        if(operator2=='*'||operator2=='/'||operator2=='%') //same precedence
         {
             return true;//remove op2
         }
@@ -115,6 +121,7 @@ bool precedence(char operator1, char operator2)
     }
     else
     {
+        printf("Returning true\n");
         return true;//op1 = + or - so op2 is same or higher precedence
     }
 }

@@ -16,7 +16,7 @@ let         80 let u = 4*(j-7)          Assign to u the value of 4*(j-7). An arb
                                         expression can appear to the right of the equal sign
 print       10 print w                  Display the value of single integer variable w
 goto        70 goto 45                  Transfer program control to line 45
-if..goto    35 if i==z goto 80          Compare i and z for equality and transger control to line 80
+if..goto    35 if i==z goto 80          Compare i and z for equality and transfer control to line 80
                                         if the condition is true; otherwise, continue execution with the
                                         next statement
 end         99 end                      Terminate program execution

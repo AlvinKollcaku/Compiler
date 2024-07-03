@@ -1,0 +1,6 @@
+1 input number
+2 if number % 2 == 0 goto 5
+3 print "Odd"
+4 goto 6
+5 print "Even"
+6 end

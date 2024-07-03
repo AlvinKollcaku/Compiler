@@ -22,12 +22,12 @@ if..goto    35 if i==z goto 80          Compare i and z for equality and transfe
 end         99 end                      Terminate program execution
 ----------------------------------------------
 Additional Rules
-Simple language recognizes only lowercase letters
-A variable name is a single letter (document variables in rem statements)
-Simple uses only int variables
-Simple does not have variable declaration - merely mentioning a variable name declares the variable and initilzes it to 0
-Simple's syntax does not allow string manipulation(reading a string,writing a string,comparing strings, etc)
+Simple does not have variable declaration - merely mentioning a variable name declares the variable and initializes it to 0
+Simple's syntax allows only string input and output -> Not comparison
 The following relational and equality operators <,>,<=,>=,== or != are valid in if..goto statement
+Maximum length of variables is 30 chars
+For string inputs the maximum string length is 10 characters -> if the string exceeds length 10 the rest of the characters will be truncated
+If the lenght of the inputted string is less than 10 chars it does not matter for the memory because there will always be 10 places reserved-> imitating malloc(10) implicitly
 ---------------------------------------------------
 ->The compiler will read a file containing the Simple program and will compile it into SML code
 and then writes it one instruction per line to a text file.
@@ -56,14 +56,4 @@ the compiler's SECOND PASS must complete the instruction
 -let statement will evaluate an arbitrarily complex infix arithmetic expression consisting of
 operators , single letter integer variables names , integer constants -> ! Expressions should seperate each operand and operator with space!
 
-
-5 rem sum 1 to x
-10 input x
-15 input x
-20 input y
-25 if x > y goto 20
-30 end
-
-Modifications:
-Use hash map as symbol table for fast retrieval of locations
 

@@ -8,10 +8,10 @@
 
 struct tableEntry
 {
-    char symbol2[6];//This is for string variables->everything could have been stored here but since it
+    char variable[30];//This is for string variables->everything could have been stored here but since it
                     //was added later it need changes
     double symbol;//ASCII value of var, constant or line num
-    char type;//'C'=constant 'V'=Variable 'L'=line number
+    char type;//'C'=Numerical_Constant 'L'=line_number 'V'=Variable 'S'=String_Literal
     int location;//0 to 99 -> SMLs memory location associated with the symbol
     //char[20] command;
 };
@@ -25,6 +25,7 @@ extern int flags[1000]; //flags array has the same size as SML because the index
 extern struct tableEntry SymbolTable[2000];
 extern int SymbolTableIndex;
 extern int lastValidLine;
+extern bool isString;
 
 typedef struct Postfix
 {
@@ -38,15 +39,18 @@ typedef struct Postfix * PostfixPtr;
 void printSML();
 bool isKeyword(char *str);
 int returns_SML_location_from_SymbolTable(char *Symbol);
-bool isVariable(char *var);
-bool isKeyword(char *str);
+bool isValidVariable(char *var);
 bool isConstant(const char* str);
 void printSymbolTable();
 int returns_LineNum_location_from_SymbolTable(char* Symbol);
-int returns_LineNum_location_from_SymbolTable2(int Symbol);
+int returns_LineNum_location_from_SymbolTable2(int Symbol); //this is for line numbers for the flags array
 void printFlagsArray();
 bool isVariableInSymbolTable(int address);
 void completeInstructions();
+void remove_newline(char *str);
+void check_String_length(char * var);
+void checkCounters();
+bool isValidStringLiteral(char *var);
 
 //Keywords.c
 void inputKeyword(char *tokenPtr);
@@ -56,7 +60,8 @@ bool isConditionalOperator(char c);
 void letKeyword(char *tokenPtr);
 void gotoKeyword(char *tokenPtr);
 void inputS(char *tokenPtr);
-void printS(char *tokenPtr);
+void newlineKeyword();
+void letS(char *tokenPtr);
 
 //KeywordHelper.c
 void handleOperators(char Operators[],int Operands[],char * tokenPtr);
@@ -81,5 +86,6 @@ void execute(double* accumulator,int* instructionCounter,int* instructionRegiste
 
 void load(double* memory,int instructionCounter);
 int isInteger(double num);
+void clear_input_buffer();
 
 #endif //MINICOMPILERFINAL_COMPILERHEADER_H

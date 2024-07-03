@@ -14,6 +14,7 @@ int flags[1000]; //flags array has the same size as SML because the index of the
 struct tableEntry SymbolTable[2000];
 int SymbolTableIndex = 0;
 int lastValidLine = 0;
+bool isString=false;
 
 int main() {
     for (int i = 0; i < 1000; i++)
@@ -37,6 +38,7 @@ int main() {
     while (fgets(line, MAX_LINE_LENGTH, infile) != NULL) {
         //printf("Current line:%s\n",line);
 
+        checkCounters();
         //fgets(line, MAX_LINE_LENGTH, infile) != NULL
         //while (fscanf(infile, "%s", line) != EOF) {
         //strtok(line, " "): This function splits the string line
@@ -56,10 +58,9 @@ int main() {
         //Will process a single row
         while (tokenPtr != NULL) //assuming everything is written in lowerCase
         {
-            //printf("TOKEN: %s\n",tokenPtr);
+            //printf("TOKEN: %s with length %llu and comparison result %d\n",tokenPtr, strlen(tokenPtr), strcmp(tokenPtr, "letS"));
             //Putting the line number first in the symbol table
-            //TODO could also just check if a symbol is in the symbol table or not to input it
-            //TODO Watch out for constants tho
+
             if (LineNumber) {
                 SymbolTable[SymbolTableIndex].symbol = atoi(tokenPtr);
                 SymbolTable[SymbolTableIndex].type = 'L';
@@ -74,18 +75,28 @@ int main() {
                 if (strcmp(tokenPtr, "input") == 0) //input= READ instruction in SML
                 {
                     inputKeyword(tokenPtr);
-                } else if (strcmp(tokenPtr, "if") == 0)  //CASE 2: IF STATEMENT
+                    break;
+                }else if(strcmp(tokenPtr, "inputS") == 0)
+                {
+                    inputS(tokenPtr);
+                    break;
+                }
+                else if (strcmp(tokenPtr, "if") == 0)  //CASE 2: IF STATEMENT
                 {
                     conditionKeyword(tokenPtr);
                     break;
-                } else if (strcmp(tokenPtr, "let") == 0) {
+                }else if (strcmp(tokenPtr, "let") == 0) {
                     letKeyword(tokenPtr);
                     break;
+                } else if (strcmp(tokenPtr, "letS") == 0) {
+                    letS(tokenPtr);
                 } else if (strcmp(tokenPtr, "print") == 0) {
                     printKeyword(tokenPtr);
-                } else if (strcmp(tokenPtr, "goto") == 0) {
+                }else if (strcmp(tokenPtr, "goto") == 0) {
                     gotoKeyword(tokenPtr);
-                } else if (strcmp(tokenPtr, "end") == 0) {
+                } else if (strcmp(tokenPtr, "NL") == 0) {
+                    newlineKeyword();
+                }else if (strcmp(tokenPtr, "end") == 0) {
                     //Completing the incomplete instructions
                     completeInstructions();
 
@@ -100,6 +111,7 @@ int main() {
                     printSymbolTable();
                     printSML();
 
+                    printf("\nOutput:\n");
                     execute(&accumulator, &instructionCounter, &instructionRegister,
                             &operationCode, &operand, SML);
                     dump(accumulator, instructionCounter, instructionRegister,
@@ -125,10 +137,3 @@ int main() {
 
     return 0;
 }
-
-/* TODO in the if case if x>y it is taken as single token-> Temp solution use spaces to separate
-a single tokenPtr-> check tokenPtr length!=1*/
-/* TODO: Remove the arguments for most function when they are already global vars*/
-/* TODO: With comparisons we can only have 2 operators -> fix
- * MAJOR TODO: Simple language only works with 1 char variables and constants
-So x > 2+2 does not work */

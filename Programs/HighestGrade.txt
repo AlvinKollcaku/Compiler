@@ -1,0 +1,24 @@
+0 inputS StudentName
+1 input gradeOne
+2 input gradeTwo
+3 input gradeThree
+4 print "Max" "Grade" "for" StudentName "is" NL
+5 letS success = "Success"
+6 rem calculating max grade and printing it
+7 if gradeOne > gradeTwo goto 10
+8 if gradeTwo > gradeThree goto 15
+9 goto 11
+10 if gradeOne > gradeThree goto 13
+11 print gradeThree NL
+12 goto 17
+13 print gradeOne NL
+14 goto 17
+15 print gradeTwo NL
+16 goto 17
+17 let avg = (gradeOne + gradeTwo + gradeThree) / 3
+18 print "The" "average" "is" avg NL
+19 if avg > 60 goto 22
+20 print "Fail"
+21 goto 23
+22 print success
+23 end

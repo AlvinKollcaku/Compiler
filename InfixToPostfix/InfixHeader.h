@@ -7,6 +7,8 @@
 
 #include <stdbool.h>
 
+extern int lastValidLine;
+
 struct stackNode
 {
     char data;

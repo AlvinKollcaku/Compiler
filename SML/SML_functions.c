@@ -60,7 +60,7 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
             //Input Output operations
 
             case READ:
-                printf("Enter the number for location %d: \n", *operand);
+                //printf("Enter the number for location %d: \n", *operand);
                 double number;
                 scanf("%lf", &number);
                 if (number > 99999 || number < -99999) {
@@ -71,8 +71,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                 (*instructionCounter)++;
                 break;
             case READ_STRING:
-                char input[6]="";
-                printf("Enter the string for location %d (not more than 5 characters)\n", *operand);
+                char input[11];
+                //printf("Enter the string for location %d (not more than 10 characters)\n", *operand);
 
                 if (fgets(input, sizeof(input), stdin) != NULL) {
                     // Removing newline character if present
@@ -95,7 +95,7 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                 (*instructionCounter)++;
                 break;
             case WRITE:
-                printf(": %.2lf \n", memory[*operand]);
+                printf("%.2lf ", memory[*operand]);
                 (*instructionCounter)++;
                 break;
             case WRITE_STRING:
@@ -113,9 +113,12 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     //%1000 just to skip the integer that specifies the length the first time
                 }
                 result[i]='\0';
-                printf(": %s\n",result);
+                printf("%s ",result);
                 (*instructionCounter)++;
-
+                break;
+            case NEWLINE:
+                puts("");
+                (*instructionCounter)++;
                 break;
                 //Load/store operations
 
@@ -134,8 +137,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     (*accumulator) + memory[*operand] >= -99999)
                     (*accumulator) += memory[*operand];
                 else {
-                    printf("***Value in accumulator exceeds 99999 or -99999***\n"
-                           "***Simple language execution abnormally terminated***\n");
+                    printf("***Value in accumulator exceeds 99999 or -99999 at instruction %d***\n"
+                           "***Simple language execution abnormally terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;
@@ -145,8 +148,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     (*accumulator) - memory[*operand] >= -99999)
                     (*accumulator) -= memory[*operand];
                 else {
-                    printf("***Value in accumulator exceeds 99999 or -99999***\n"
-                           "***Simpletron execution abnormally terminated***\n");
+                    printf("***Value in accumulator exceeds 99999 or -99999 at instruction %d***\n"
+                           "***Simple language execution abnormally terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;
@@ -155,8 +158,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                 if (memory[*operand] != 0) {
                     (*accumulator) /= memory[*operand];
                 } else {
-                    printf("***Attempt to divide by 0***\n"
-                           "***Simpletron execution abnormally terminated***\n");
+                    printf("***Attempt to divide by 0 at instruction %d***\n"
+                           "***Simpletron execution abnormally terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;
@@ -166,8 +169,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     (*accumulator) * memory[*operand] >= -99999)
                     (*accumulator) *= memory[*operand];
                 else {
-                    printf("***Value in accumulator exceeds 99999 or -99999***\n"
-                           "***Simpletron execution abnormally terminated***\n");
+                    printf("***Value in accumulator exceeds 99999 or -99999 at instruction %d***\n"
+                           "***Simple language execution abnormally terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;

@@ -1,5 +1,3 @@
-!!In the expression the different tokens must be seperated by space 2+3 is Wrong -> 2 + 3 is Correct
-
 The infix to postfix converter uses the stack data structure
 The stack will hold the operators and the ( which will be appended to postfix in the end
 The digits of infix are directly put in postfix

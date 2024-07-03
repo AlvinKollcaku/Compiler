@@ -12,4 +12,5 @@ void load(double* memory,int instructionCounter);
 int isInteger(double num);
 bool is_valid_float(const char *str);
 void clear_input_buffer();
+
 #endif //MINICOMPILERFINAL_SML_HEADER_H

@@ -80,12 +80,12 @@ int evaluatePostfixExpression2(char *expr[])
 
     for(int i=0; strcmp(expr[i],"$") != 0; i++)
     {
-        if(isVariable(expr[i]))
+        if(isValidVariable(expr[i]))
         {
             //printf("%c is variable\n", *expr[i]);
             if(returns_SML_location_from_SymbolTable(expr[i])==-1)
             {
-                SymbolTable[SymbolTableIndex].symbol=(char)*expr[i];
+                strcpy(SymbolTable[SymbolTableIndex].variable, expr[i]);
                 SymbolTable[SymbolTableIndex].type='V';
                 SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
             }
@@ -109,11 +109,13 @@ int evaluatePostfixExpression2(char *expr[])
             int resultLocation= returns_SML_location_from_SymbolTable(expr[i]);
             if(resultLocation==-1)
             {
-                SymbolTable[SymbolTableIndex].symbol=strtof(expr[i], &pend);
+                //printf("%s about to be put in symbol table %lf\n",expr[i],strtod(expr[i], &pend));
+                SymbolTable[SymbolTableIndex].symbol=strtod(expr[i], &pend);
                 SymbolTable[SymbolTableIndex].type='C';
                 SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
                 resultLocation=SmlVariableIndexCounter+1;
-                SML[SmlVariableIndexCounter+1]=strtof(expr[i], &pend);
+                //printf("%lf put in symbol table\n",SymbolTable[SymbolTableIndex-1].symbol);
+                SML[SmlVariableIndexCounter+1]=strtod(expr[i], &pend);
             }
             pushPostfix(&topPtr,resultLocation);
         }
@@ -155,9 +157,6 @@ void reorganizeStack(int a1,int a2,char operator,PostfixPtr* topPtr)
      a location in the SML array (resultLocation)
      3)STORE resultLocation
      */
-    double result=0;
-    char str[50];
-    int resultLocation;
     switch(operator)
     {
         case '+':
@@ -239,3 +238,4 @@ int find_operator_position(const char *str) {
     }
     return -1;
 }
+

@@ -286,3 +286,69 @@ conditionKeyword()
             exit(0);
         }
 }
+void printS(char *tokenPtr)
+{
+    tokenPtr=strtok(NULL," "); //1)Going to the variable
+    //printf("CurrentToken:%s\n",tokenPtr);
+    if(!isValidVariable(tokenPtr))
+    {
+        printf("The variable after input keyword should be max 5 characters and should only contain letters"
+               "->%s is not correct at line number %d",tokenPtr,lastValidLine);
+        exit(1);
+    }
+
+    //printf("CASE:INPUT --> Value returned from function %d \n",x);
+    int line=returns_SML_location_from_SymbolTable(tokenPtr);
+    if(line==-1) //not in symbol table -> we put it there
+    {
+        //printf("Putting it in the symbol table\n");
+        strcpy(SymbolTable[SymbolTableIndex].variable,tokenPtr);
+        SymbolTable[SymbolTableIndex].type='S';
+        SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter;
+
+        //printf("Inputted: %c\n",SymbolTable[SymbolTableIndex-1]);
+
+        SML[SmlInstructionCounter++]=13000+SmlVariableIndexCounter;
+        SmlVariableIndexCounter-=10;
+        //1000 + the location for the referenced variable(which is the next token)
+    }
+    else
+    {
+        //We use its location in the symbol table
+        SML[SmlInstructionCounter++]=13000+line;
+    }
+}
+
+ remove_newline(tokenPtr);
+
+    for(int i=0;i< strlen(tokenPtr);i++)
+    {
+        if(isspace(tokenPtr[i]))
+            continue;
+
+        if(tokenPtr[i]=='\"') //We are dealing with a string literal
+        {
+            char *noSpacesString=tokenPtr+i;
+            if(isValidStringLiteral(noSpacesString))
+            {
+                strcpy(SymbolTable[SymbolTableIndex].variable,noSpacesString);
+                SymbolTable[SymbolTableIndex].type='S';
+                SymbolTable[SymbolTableIndex++].location=left_variable_location;
+
+                size_t len = strlen(noSpacesString);
+                //Now that we are dealing with a valid string we store it in memory in sequence
+
+                SML[SmlVariableIndexCounter--]=(len-2)*10000+(int)noSpacesString[1]; //skipping \"
+
+                for(int i=2;i<len-1;i++) //also skipping the last \" with len-1
+                {
+                    SML[SmlVariableIndexCounter--]=(int)noSpacesString[i];
+                }
+            }else
+            {
+                printf("Invalid string literal in let statement at line %d\n",lastValidLine);
+                exit(1);
+            }
+            return;
+        }
+    }

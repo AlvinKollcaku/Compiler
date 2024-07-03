@@ -1,0 +1,8 @@
+0 rem program that inputs a number and based on that number
+1 rem it goes to the corresponding subroutine
+
+
+
+
+
+

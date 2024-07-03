@@ -27,24 +27,59 @@ void convertToPostfix(char *infix,char *postfix2[]) {
 
     for (int i = 0; !(isEmpty(topPtr)); i++) {
             // If the current character is a digit
+        //printf("Current %c\n",infix[i]);
             if (isdigit(infix[i])) {
-                char number[20]; //max number of digits is 20 -> TODO check in syntax analyser
+                char number[20]; //max number of digits is 19 -> TODO check in syntax analyser
                 int numIndex = 0;
                 // Collecting the full number
-                while (isdigit(infix[i])&&numIndex<19) { //->TODO check in syntax analyser 2.3 not 2,3
+                while ((isdigit(infix[i])||infix[i]=='.')&&numIndex<19) {
                     number[numIndex++] = infix[i++];
+                }
+                if(isdigit(infix[i])) //If next token is still a digit than we have crossed legth 20
+                {
+                    printf("A number at line %d is longer than 19 characters",lastValidLine);
+                    exit(1);
                 }
                 i--;
                 number[numIndex] = '\0';
+                //printf("Number : %s \n",number);
+                if(strtod(number,NULL)>99999 ||strtod(number,NULL)<-99999)
+                {
+                    printf("Overflow error at line %d. %s is out of the range [-99999,99999]\n",lastValidLine,number);
+                    exit(1);
+                }
                 postfix2[tokenIndex] = (char *) malloc(sizeof(char) * (strlen(number) + 1));
                 strcpy(postfix2[tokenIndex++], number);
+                //printf("Number in postfix %s\n",postfix2[tokenIndex-1]);
             }else if(isalpha(infix[i]))//This is for the compiler part to put the variables in
             {
-                postfix2[tokenIndex++]= charToString(infix[i]);
+                char stringBuilt[26];
+                int index=0;
+                while(isalpha(infix[i]))
+                {
+                   // printf("Is alpha : %c\n",infix[i]);
+                    if(index>24)
+                    {
+                        printf("Infix expression has string larger than 25 chars\n");
+                        exit(1);
+                    }
+                    stringBuilt[index++]=infix[i++];
+                }
+                i--; //It will be incremented at the next loop iteration
+
+                stringBuilt[index]='\0';
+                //printf("String putting in postfix[%d] is %s \n",tokenIndex,stringBuilt);
+                postfix2[tokenIndex] = (char *) malloc(sizeof(char) * (strlen(stringBuilt) ));
+                strcpy(postfix2[tokenIndex++],stringBuilt);
             }
                 // If the current character is an operator
             else if (isOperator(infix[i])) {
                 //printf("About to handle %c\n",infix[i]);
+                if(infix[i]=='/' && infix[i+1]=='0')
+                {
+                    printf("Error: Possible attempt to divide by 0 at line number %d.\nPlease remove and leading redundant zeros\n",lastValidLine);
+                    exit(1);
+                }
                 if(precedence(infix[i], topPtr->data))
                 {
                     popValue=pop(&topPtr);//If topPtr->data has same or higher precedence we pop it
@@ -84,6 +119,7 @@ void convertToPostfix(char *infix,char *postfix2[]) {
                 }
                 break;
             }
+       // printf("Next one is %c\n",infix[i]);
     }
 }
 
@@ -121,7 +157,7 @@ bool precedence(char operator1, char operator2)
     }
     else
     {
-        printf("Returning true\n");
+        //printf("Returning true\n");
         return true;//op1 = + or - so op2 is same or higher precedence
     }
 }
@@ -282,3 +318,4 @@ char* charToString(char c) {
     }
     return str;
 }
+

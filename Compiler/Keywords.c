@@ -283,12 +283,13 @@ void gotoKeyword(char *tokenPtr)
 {
     tokenPtr= strtok(NULL," ");
     int line=returns_LineNum_location_from_SymbolTable(tokenPtr);
+    printf("Goto %d\n",line);
     if(line==-1)
     {
         flags[SmlInstructionCounter] = atoi(tokenPtr);
         SML[SmlInstructionCounter++] = 40000;
     }else
-        SML[SmlInstructionCounter]=40000 + line;
+        SML[SmlInstructionCounter++]=40000 + line;
 }
 
 void inputS(char *tokenPtr)

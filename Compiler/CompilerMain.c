@@ -58,8 +58,8 @@ int main() {
         //Will process a single row
         while (tokenPtr != NULL) //assuming everything is written in lowerCase
         {
-            //printf("TOKEN: %s with length %llu and comparison result %d\n",tokenPtr, strlen(tokenPtr), strcmp(tokenPtr, "letS"));
-            //Putting the line number first in the symbol table
+            remove_newline(tokenPtr);
+            //in the symbol table
 
             if (LineNumber) {
                 SymbolTable[SymbolTableIndex].symbol = atoi(tokenPtr);
@@ -93,6 +93,7 @@ int main() {
                 } else if (strcmp(tokenPtr, "print") == 0) {
                     printKeyword(tokenPtr);
                 }else if (strcmp(tokenPtr, "goto") == 0) {
+                    printf("Invoking goto\n");
                     gotoKeyword(tokenPtr);
                 } else if (strcmp(tokenPtr, "NL") == 0) {
                     newlineKeyword();
@@ -111,7 +112,7 @@ int main() {
                     printSymbolTable();
                     printSML();
 
-                    printf("\nOutput:\n");
+                    printf("\n---------\n");
                     execute(&accumulator, &instructionCounter, &instructionRegister,
                             &operationCode, &operand, SML);
                     dump(accumulator, instructionCounter, instructionRegister,

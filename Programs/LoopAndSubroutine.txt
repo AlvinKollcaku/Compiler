@@ -1,6 +1,19 @@
 0 rem program that inputs a number and based on that number
 1 rem it goes to the corresponding subroutine
-
+2 print "Input" "number" NL
+3 input number
+4 if number % 2 == 0 goto 11
+5 rem below is the first subroutine which prints first 5 integers if input is odd
+6 if x > 5 goto 20
+7 print x NL
+8 let x = x +1
+9 goto 6
+10 rem subroutine which prints first 10 integers if input is even
+11 if x > 10 goto 20
+12 print x NL
+13 let x = x +1
+14 goto 11
+20 end
 
 
 

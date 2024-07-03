@@ -25,7 +25,7 @@ This Compiler turns the "Simple" but powerful language with 9 keywords into an a
    - Postfix expressions are converted to SML instructions using a stack-based evaluation.
    - Operators supported: `+`, `-`, `/`, `*`, `%`, `^`.
    - Example conversion: `2.3 + 22 * (2^2 % 3) * 22.75` becomes `2.3 22 2 2 ^ 3 % * 22.75 * +`.
-   - Floating point numbers are allowed, and the range [-99999, 99999] is respected.
+   - Floating point numbers are allowed, and the range [-99999, 99999] must be respected.
 
 3. **The Compiler**
    - Converts each instruction in the **Simple** language into **SML**.

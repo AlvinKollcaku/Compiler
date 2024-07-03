@@ -10,62 +10,51 @@
 7. [Demo Program](#demo-program)
 
 ## Introduction
-This Compiler turns the "Simple" but powerful language with 9 keywords into an assembly like Simple Machine Language (SML). The project consists of 3 parts:
-1) The SML language
-     The simple language contains:
--Accumulator -> a special register in which info is put before Simple language uses it
-                in calculations or examines it
+This Compiler turns the "Simple" but powerful language with 9 keywords into an assembly-like Simple Machine Language (SML). The project consists of three main parts:
 
--A word -> 4 digit signed decimal number
--A word=SimpleLanguage Instruction
-        First 2 digits = operation code -> specify operation to be performed
-        Last 2 digits = operand -> Memory location to do the operation on
--------------------------------------------------------------------------------------
-Operation Code  -> Meaning
+1. **The Virtual Machine: Simpletron (SML folder)**
+   - Simpletron is a virtual machine that runs programs written in SML.
+   - It handles all information in terms of **words**, which are signed 5-digit decimal numbers (e.g., +10999).
+   - Simpletron has a 1000-word memory, with each word referenced by locations 0 through 999.
+   - Each SML instruction occupies one word of Simpletron's memory. The first two digits are the operation code, and the last three digits correspond to the memory location for the operation.
+   - Example: `10999` means **READ** a value from the user and store it in location 999.
+   - For detailed operation codes, see `SML/SML.txt`.
 
-Input/Output
-READ 10 -> Read a word(representing a value) from keyboard into specific memory location
-WRITE 11 -> Write a word from a specific location in memory to the screen
+2. **Infix to Postfix Converter**
+   - Converts complex infix expressions (e.g., `2+3`) into postfix (e.g., `2 3 +`) to be evaluated in SML.
+   - Postfix expressions are converted to SML instructions using a stack-based evaluation.
+   - Operators supported: `+`, `-`, `/`, `*`, `%`, `^`.
+   - Example conversion: `2.3 + 22 * (2^2 % 3) * 22.75` becomes `2.3 22 2 2 ^ 3 % * 22.75 * +`.
+   - Floating point numbers are allowed, and the range [-99999, 99999] is respected.
 
-Load/Store operations
-LOAD 20 -> Load a word from a specific location in memory into the accumulator
-STORE 21 -> Store a word from the accumulator into a specific location in memory
+3. **The Compiler**
+   - Converts each instruction in the **Simple** language into **SML**.
+   - The Simple language includes commands: `rem`, `input`, `inputS`, `let`, `letS`, `print`, `goto`, `if..goto`, and `end`.
+   - Operators in Simple have the same precedence as in C, and parentheses can change the order of evaluation.
 
-Arithmetic operations
-ADD 30 -> Add a word from a specific location in memory to the word in the accumulator
-            (the result is left in the accumulator)
-SUBTRACT 30 -> SUBTRACT a word from a specific location in memory to the word in the accumulator
-            (the result is left in the accumulator)
-DIVIDE 30 -> DIVIDE a word from a specific location in memory to the word in the accumulator
-            (the result is left in the accumulator)
-MULTIPLY 30 -> MULTIPLY a word from a specific location in memory to the word in the accumulator
-            (the result is left in the accumulator)
+### Compiler Passes
+1. **First Pass**
+   - Constructs a symbol table with every line number, variable name, numerical constant, and string literal.
+   - Produces the corresponding SML instruction for each Simple statement.
+   - Performs **error checking**.
 
-Transfer-of-control operations:
-BRANCH 40 -> Branch to a specific location in memory
-BRANCHNEG 41 -> Branch to a specific location in memory if the accumulator is negative
-BRANCHZERO 42 -> Branch to a specific location in memory if the accumulator is zero
-HALT 43 -> Halt the program
+2. **Second Pass**
+   - Completes unfinished instructions and outputs the SML program to a file.
+   - Example: Resolving `goto 60` if line 60 has not yet been reached in the first pass.
 
-------------------------------------------------------------------------------------
-There are 4 registers used in the language simulator
-accumulator
-instructionCounter - will hold the current instruction number
-instructionRegister - will hold the current instruction (operationCode + operand)
-operationCode - will hold the first 2 digits of the instruction being executed
-operand - will hold the last 2 digits of the instruction being executed
+### Error Handling
+The compiler handles various error cases, which are detailed in a separate section (to be included as necessary).
 
-1)Before running SML program we load it into memory
-
-3) The infixToPostfix Converter
-    -The job of this program is to convert arbitrarily complex infix expression like 2+3*(4-2) into postfix 2 3 4 2-*+. This is done because everything in the Simple lanugage has to be converted into SML. The infix expression can't be converted to SML directly, but the postfix one can. So the above expression will be evaluated with SML via the following commands after each of the constants have been put in the memory.
-5) The compiler
-6) 
+## Further Details
+- For a complete explanation of operation codes, see `SML/SML.txt`.
+- For an in-depth explanation of the compiler and the Simple language commands, see `Compiler/CompilerExplain.txt`.
+   
+![image](https://github.com/AlvinKollcaku/Compiler/assets/142890850/b5c260c0-e983-40ee-a309-8c2cd1a74eef)
 
 ## Features
 - List of key features of the compiler
-  - Converts simple language to assembly
-  - Supports comments, string and numerical variable initialization, printing, conditional jumps, and more
+  - Converts simple language to the assembly like Simple machine language (SML)
+  - Supports comments, string and numerical variable initialization, printing, conditional jumps, loops , subroutines (functions)
 
 ## Installation
 - Prerequisites
@@ -79,12 +68,14 @@ operand - will hold the last 2 digits of the instruction being executed
 - Command-line options
 - Input and output file formats
 
-## Language Keywords
+## Simple Language Keywords
 - Detailed description of each keyword
   - `rem`: Comment
-  - `letS`: String initialization
+  - `input`: numerial input
+  - `inputS`: String input
+  - `letS`: String variable initialization
   - `let`: Numerical variable initialization
-  - `print`: Print variables, string literals, and constants
+  - `print`: Print variables, string literals, and numerical constants
   - `if expression goto`: Conditional jump
   - `goto`: Unconditional jump
   - `end`: End of the program

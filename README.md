@@ -100,7 +100,7 @@ Some programs showcasing the power of the Simple language can be found in the Pr
 ### Program: `Programs/EvenOrOdd.txt`
 ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/e8407b8e-d95a-4baa-a9ca-50858a2ae2e4)
 
-### Symbol Table
+### Symbol Table 
 
 | Symbol   | Type | Location |
 |----------|------|----------|
@@ -126,25 +126,33 @@ This table organizes the symbols used in the program, categorizing them by their
 
 ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/9d3ff984-fb61-420b-94c5-4cfe93ac5977)
 
-### Output + Memory 
-![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d7d4f461-2003-43ce-953b-162a9ff57bb1)
-![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/5e016592-f77f-400c-a1ba-ffa234e1f70c)
+### Output  
+![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/a7cbd24d-a2ff-4398-8d6c-d13629c9c12b)
+
+### Registers and Memory
+![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/21fe246c-6bf4-4025-9adc-308ddfb74db7)
 
 ### Explanation
 
 This program demonstrates basic flow control in the Program. Here's a breakdown of its functionality:
 
 - **Printing Strings**: Lines 0-2 use the `print` keyword to output multiple strings: "Enter", "a", "number", followed by a newline (NL).
+                       In SML it corresponds to 4 instructions. 3 to print each string and one for the newline.
 - **Input**: Line 1 uses the `input` keyword to prompt the user for a numerical input, which is stored in the variable `number`.
+             Corresponds to 1 instruction in SML.
 - **Conditional Branching**: Line 2 checks if the value stored in `number` is even (`number % 2 == 0`). If true, the program jumps to line 5; otherwise, it continues to line 3.
+                             For SML first each side of the expression is turned into postfix. So the above expression becomes number 2 % == 0. Than the evaluation occurs.
+                             We evaluate the left side by LOADING the value of number in accumulator, % the value in accumulator with 2 and storing the result in the next free spot.
+                             Than we load this result in accumulator and subtract the right side value from it (Here: 0). If value in accumulaotr is 0 we branch, else we continue with
+                             the next SML instruction.
 - **Output Based on Condition**: 
   - If `number` is even, line 5 prints "Even".
   - If `number` is odd, line 3 prints "Odd".
 - **End of Program**: Line 6 marks the end of the program execution.
 
-The symbol table provides a structured view of all symbols used in the program, including line numbers, variables (`number`), constants (`2.00`, `0.00`), and string literals (`"Enter"`, `"Odd"`, `"Even"`). Each symbol is categorized by type and mapped to its corresponding memory location, facilitating efficient compilation into the Simple Machine Language (SML).
+The symbol table provides a structured view of all symbols used in the program, including line numbers, variables (`number`), constants (`2.00`, `0.00`), and string literals (`"Enter"`, `"Odd"`, `"Even"`). Each symbol is categorized by type and mapped to its corresponding memory location.
 
-The corresponding SML program executes these operations in a simulated environment, reflecting the sequence of actions defined in the Simple language program.
+The corresponding SML program executes these operations in a simulated environment, reflecting the sequence of actions defined in the Simple language program.  
 
 
 

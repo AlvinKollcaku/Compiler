@@ -49,7 +49,7 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
 2. **Second Pass**
    - Completes unfinished instructions and outputs the SML program to a file.
    - Example: Resolving `goto 60` if line 60 has not yet been reached in the first pass.
-   - 
+     
 ## Further Details
 - For a complete explanation of operation codes, see `SML/SML.txt`.
 - For an in-depth explanation of the compiler and the Simple language, see `Compiler/CompilerExplain.txt`.

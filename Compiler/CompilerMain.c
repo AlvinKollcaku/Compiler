@@ -1,3 +1,21 @@
+/*
+ * <Compiler>
+ * Copyright (C) <2024> <Alvin Kollçaku>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
@@ -100,6 +118,7 @@ int main() {
                     //Completing the incomplete instructions
                     completeInstructions();
 
+                    double memory[1000]= {0};
                     double accumulator = 0;
                     int instructionCounter = 0;
                     int instructionRegister = 0;
@@ -108,14 +127,18 @@ int main() {
 
                     SML[SmlInstructionCounter] = 49000;
 
+                    writeArrayToFile("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\SML\\Program.txt",SML,1000);
                     printSymbolTable();
                     printSML();
 
+                    //We could have skipped the loading phase and go to execution directly with our SML array
+                    //But in order to simulate a compilation process we use the file that has the program which represents the executable file
                     printf("\n---------\n");
+                    load(memory,instructionCounter);
                     execute(&accumulator, &instructionCounter, &instructionRegister,
-                            &operationCode, &operand, SML);
+                            &operationCode, &operand, memory);
                     dump(accumulator, instructionCounter, instructionRegister,
-                         operationCode, operand, SML);
+                         operationCode, operand, memory);
                     exit(0);
 
                 }

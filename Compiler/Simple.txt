@@ -1,7 +1,28 @@
-0 print "Enter" "a" "number" NL
-1 input number
-2 if number % 2 == 0 goto 5
-3 print "Odd"
-4 goto 6
-5 print "Even"
-6 end
+0 print "Enter" "Student" "name" NL
+1 inputS StudentName
+2 print "Enter" "Grade" "One" NL
+3 input gradeOne
+4 print "Enter" "Grade" "Two" NL
+5 input gradeTwo
+6 print "Enter" "Grade" "Three" NL
+7 input gradeThree
+8 print "Max" "Grade" "for" StudentName "is" NL
+9 letS success = "Success"
+10 rem calculating max grade and printing it
+11 if gradeOne > gradeTwo goto 14
+12 if gradeTwo > gradeThree goto 19
+13 goto 15
+14 if gradeOne > gradeThree goto 17
+15 print gradeThree NL
+16 goto 21
+17 print gradeOne NL
+18 goto 21
+19 print gradeTwo NL
+20 goto 21
+21 let avg = (gradeOne + gradeTwo + gradeThree) / 3
+22 print "The" "average" "is" avg NL
+23 if avg > 60 goto 26
+24 print "Fail"
+25 goto 27
+26 print success
+27 end

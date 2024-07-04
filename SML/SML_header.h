@@ -2,6 +2,10 @@
 #define MINICOMPILERFINAL_SML_HEADER_H
 #define CUSTOM_TAB "         "
 #include <stdbool.h>
+
+extern int SmlInstructionCounter;
+extern int SymbolTableIndex;
+
 void dump(double accumulator,int instructionCounter,int instructionRegister,
           int operationCode,int operand, double *memory);
 

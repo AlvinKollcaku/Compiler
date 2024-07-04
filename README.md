@@ -1,10 +1,10 @@
-# Simple Language to Assembly Compiler ![💻 Compiler](https://github.com/AlvinKollcaku/Compiler/assets/142890850/def1d7a8-80ea-400d-a689-97aec3a09145)
+# Simple Language to Assembly ![💻 Compiler](https://github.com/AlvinKollcaku/Compiler/assets/142890850/def1d7a8-80ea-400d-a689-97aec3a09145)
 
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
 3. [Simple Language Keywords](#simple-language-keywords)
-4. [Scheme for the process](#scheme)
+4. [Scheme for the process](#scheme-for-the-process)
 5. [Error Handling](#error-handling)
 6. [Demo Program](#demo-program)
 
@@ -88,14 +88,17 @@ In each error case the line number where it occurred is shown.
    ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/36183fe4-d868-4e82-af1d-ea58898993e0)
 7)Numbers must not be longer than 19 characters
    ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/6f42e9c2-efcb-4ff4-a847-e006de4ee782)
+8)If the Simple program is too exceeds the 1000 word memory of SML an error will be thrown.
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/3be0269c-c7db-48a0-a1ec-30d7872577b1)
 
-- Logical errors will lead to undefined behaviour(e.g. using let instead of lets to initialze a string variable).
+-Logical errors will lead to undefined behaviour(e.g. using let instead of lets to initialze a string variable).
 
 ## Demo Program
 
-Some programs showcasing the power of the Simple language can be found in the Programs folder. For example, **HighestGrade.txt** demonstrates all features of the language. Below, we'll explain a shorter program to illustrate how execution works:
+Some programs showcasing the power of the Simple language can be found in the Programs folder. For example, **HighestGrade.txt** demonstrates all features of the language. Below, I explain a shorter program to illustrate how execution works:
 
 ### Program: `Programs/EvenOrOdd.txt`
+![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/e8407b8e-d95a-4baa-a9ca-50858a2ae2e4)
 
 ### Symbol Table
 

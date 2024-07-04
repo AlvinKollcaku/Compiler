@@ -2,6 +2,7 @@
 #define WRITE 11
 #define READ_STRING 12
 #define WRITE_STRING 13
+
 #define NEWLINE 14
 
 #define LOAD 20

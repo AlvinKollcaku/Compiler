@@ -47,7 +47,7 @@ int main() {
         //strtok treats the newline char as a delimiter by default
 
         if (!isConstant(tokenPtr)) {
-            printf("%s is not valid line number after line number %d\n", tokenPtr, lastValidLine);
+            printf("ERROR: %s is not a valid line number after line number %d\n", tokenPtr, lastValidLine);
             exit(1);
         }
         //printf("THe line:%s\n",line);
@@ -93,7 +93,6 @@ int main() {
                 } else if (strcmp(tokenPtr, "print") == 0) {
                     printKeyword(tokenPtr);
                 }else if (strcmp(tokenPtr, "goto") == 0) {
-                    printf("Invoking goto\n");
                     gotoKeyword(tokenPtr);
                 } else if (strcmp(tokenPtr, "NL") == 0) {
                     newlineKeyword();
@@ -121,7 +120,7 @@ int main() {
 
                 }
             } else {
-                printf("%s is invalid token at line number %d\n", tokenPtr, lastValidLine);
+                printf("ERROR: \"%s\" is invalid token at line number %d\n", tokenPtr, lastValidLine);
                 exit(1);
             }
 

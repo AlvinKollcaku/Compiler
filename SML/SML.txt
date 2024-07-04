@@ -12,6 +12,10 @@ Operation Code  -> Meaning
 Input/Output
 READ 10 -> Read a word(representing a value) from keyboard into specific memory location
 WRITE 11 -> Write a word from a specific location in memory to the screen
+READ_STRING 12
+WRITE_STRING 13
+
+NEWLINE 14 -> prints a newline
 
 Load/Store operations
 LOAD 20 -> Load a word from a specific location in memory into the accumulator
@@ -20,17 +24,25 @@ STORE 21 -> Store a word from the accumulator into a specific location in memory
 Arithmetic operations
 ADD 30 -> Add a word from a specific location in memory to the word in the accumulator
             (the result is left in the accumulator)
-SUBTRACT 30 -> SUBTRACT a word from a specific location in memory to the word in the accumulator
+SUBTRACT 31 -> SUBTRACT a word from a specific location in memory to the word in the accumulator
             (the result is left in the accumulator)
-DIVIDE 30 -> DIVIDE a word from a specific location in memory to the word in the accumulator
+DIVIDE 32 -> DIVIDE a word from a specific location in memory to the word in the accumulator
             (the result is left in the accumulator)
-MULTIPLY 30 -> MULTIPLY a word from a specific location in memory to the word in the accumulator
+MULTIPLY 33 -> MULTIPLY a word from a specific location in memory to the word in the accumulator
             (the result is left in the accumulator)
+REMAINDER 34 -> Value in accumulator % a word in specific memory location
+                (the result is left in the accumulator)
+EXPONENTIATION 35->Value in accumulator ^ a word in specific memory location
+                                   (the result is left in the accumulator)
 
 Transfer-of-control operations:
 BRANCH 40 -> Branch to a specific location in memory
 BRANCHNEG 41 -> Branch to a specific location in memory if the accumulator is negative
-BRANCHZERO 42 -> Branch to a specific location in memory if the accumulator is zero
+BRANCHNEG_ZERO 42 -> Branch to a specific location in memory if the accumulator is zero or negative
+BRANCHPOS 43 -> Branch to a specific location in memory if the accumulator is positive
+BRANCHPOS_ZERO 44 -> Branch to a specific location in memory if the accumulator is zero or positive
+BRANCHZERO 45 -> Branch to a specific location in memory if the accumulator is zero
+BRANCHNOT_ZERO 46 -> -> Branch to a specific location in memory if the accumulator is not zero
 HALT 43 -> Halt the program
 
 ------------------------------------------------------------------------------------

@@ -1,39 +1,7 @@
-0 print "In" "the" "simple" "calculator" "the" "following"
-1 print "integers" "mean" NL
-2 print "1" ":" "+" NL
-3 print "2" ":" "-" NL
-4 print "3" ":" "*" NL
-5 print "4" ":" "/" NL
-6 print "5" ":" "%" NL
-7 print "6" ":" "^" NL
-8 print "Enter" "first" "number" NL
-9 input first
-10 print "Enter" "second" "number" NL
-11 input second
-12 print "Enter" "number" "for" "operation" NL
-13 input operation
-14 if operation == 1 goto 20
-15 if operation == 2 goto 23
-16 if operation == 3 goto 26
-17 if operation == 4 goto 29
-18 if operation == 5 goto 32
-19 if operation == 6 goto 35
-20 let result = first + second
-21 print result
-22 goto 40
-23 let result = first - second
-24 print result
-25 goto 40
-26 let result = first * second
-27 print result
-28 goto 40
-29 let result = first / second
-30 print result
-31 goto 40
-32 let result = first % second
-33 print result
-34 goto 40
-35 let result = first ^ second
-36 print result
-37 goto 40
-40 end
+0 print "Enter" "a" "number" NL
+1 input number
+2 if number % 2 == 0 goto 5
+3 print "Odd"
+4 goto 6
+5 print "Even"
+6 end

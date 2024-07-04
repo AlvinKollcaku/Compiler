@@ -20,6 +20,10 @@ if..goto    35 if i==z goto 80          Compare i and z for equality and transfe
                                         if the condition is true; otherwise, continue execution with the
                                         next statement
 end         99 end                      Terminate program execution
+
+lets - let but for strings
+inputS - input but for strings
+NL - newline (used with print)
 ----------------------------------------------
 Additional Rules
 Simple does not have variable declaration - merely mentioning a variable name declares the variable and initializes it to 0
@@ -27,7 +31,7 @@ Simple's syntax allows only string input and output -> Not comparison
 The following relational and equality operators <,>,<=,>=,== or != are valid in if..goto statement
 Maximum length of variables is 30 chars
 For string inputs the maximum string length is 10 characters -> if the string exceeds length 10 the rest of the characters will be truncated
-If the lenght of the inputted string is less than 10 chars it does not matter for the memory because there will always be 10 places reserved-> imitating malloc(10) implicitly
+If the length of the inputted string is less than 10 chars it does not matter for the memory because there will always be 10 places reserved-> imitating malloc(10) implicitly
 ---------------------------------------------------
 ->The compiler will read a file containing the Simple program and will compile it into SML code
 and then writes it one instruction per line to a text file.

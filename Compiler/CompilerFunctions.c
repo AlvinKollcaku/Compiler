@@ -141,22 +141,22 @@ void printSML() {
                 printf("  // Store value in accumulator in location %d\n", (int) SML[i] % 1000);
                 break;
             case 30:
-                printf("  //  Value in accumulator + value in location %d\n", (int) SML[i] % 1000);
+                printf("  // Value in accumulator + value in location %d\n", (int) SML[i] % 1000);
                 break;
             case 31:
-                printf("  //  Value in accumulator - value in location %d\n", (int) SML[i] % 1000);
+                printf("  // Value in accumulator - value in location %d\n", (int) SML[i] % 1000);
                 break;
             case 32:
                 printf("  // Value in accumulator / value in location %d\n", (int) SML[i] % 1000);
                 break;
             case 33:
-                printf("  //  Value in accumulator * value in location %d\n", (int) SML[i] % 1000);
+                printf("  // Value in accumulator * value in location %d\n", (int) SML[i] % 1000);
                 break;
             case 34:
                 printf("  // Value in accumulator % value in location %d\n", (int) SML[i] % 1000);
                 break;
             case 35:
-                printf("  //  Value in accumulator ^ value in location %d\n", (int) SML[i] % 1000);
+                printf("  // Value in accumulator ^ value in location %d\n", (int) SML[i] % 1000);
                 break;
             case 40:
                 printf("  // Branch to location %d\n", (int) SML[i] % 1000);
@@ -170,11 +170,14 @@ void printSML() {
             case 43:
                 printf("  // Branch to location %d if accumulator is positive\n", (int) SML[i] % 1000);
                 break;
-            case 45:
+            case 44:
                 printf("  // Branch to location %d if accumulator is positive or zero\n", (int) SML[i] % 1000);
                 break;
-            case 46:
+            case 45:
                 printf("  // Branch to location %d if accumulator is zero\n", (int) SML[i] % 1000);
+                break;
+            case 46:
+                printf("  // Branch to location %d if accumulator is not zero\n", (int) SML[i] % 1000);
                 break;
             case 49:
                 printf("  // Halt program\n");
@@ -220,7 +223,7 @@ void completeInstructions() {
 
 void checkCounters() {
     if (SmlInstructionCounter >= SmlVariableIndexCounter) {
-        printf("The inputted Simple program is too large for SML[1000]");
+        printf("ERROR:The inputted Simple program is too large for SML[1000]");
         exit(1);
     }
 }
@@ -229,7 +232,7 @@ bool isValidVariable(char *var) {
     remove_newline(var);
     size_t len = strlen(var);
     if (len > 25) {
-        printf("Variable %s at line %d exceeds length of 25 chars\n", var, lastValidLine);
+        printf("ERROR:Variable %s at line %d exceeds length of 25 chars\n", var, lastValidLine);
         exit(1);
     }
     //printf("Variable being validated %s has length %d\n",var,len);
@@ -271,6 +274,6 @@ bool isValidStringLiteral(char *var) {
     if (*var == '\"' && var[len - 1] == '\"' && len - 2 <= 10) //We will not input the two \" in memory
         return true;
 
-    printf("The string literal %s at line %d is not valid or is longer than 10 chars.", var, lastValidLine);
+    printf("ERROR:The string literal %s at line %d is not valid or is longer than 10 chars.\nA valid string literal includes only characters between the \"\" and no whitespaces ", var, lastValidLine);
     exit(1);
 }

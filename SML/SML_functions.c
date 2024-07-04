@@ -148,8 +148,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     (*accumulator) - memory[*operand] >= -99999)
                     (*accumulator) -= memory[*operand];
                 else {
-                    printf("***Value in accumulator exceeds 99999 or -99999 at instruction %d***\n"
-                           "***Simple language execution abnormally terminated***\n",*instructionCounter);
+                    printf("***VValue in accumulator is out of the range [-99999,99999] at instruction %d***\n"
+                           "***SML language execution terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;
@@ -159,7 +159,7 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     (*accumulator) /= memory[*operand];
                 } else {
                     printf("***Attempt to divide by 0 at instruction %d***\n"
-                           "***Simpletron execution abnormally terminated***\n",*instructionCounter);
+                           "***SML execution  terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;
@@ -169,8 +169,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     (*accumulator) * memory[*operand] >= -99999)
                     (*accumulator) *= memory[*operand];
                 else {
-                    printf("***Value in accumulator exceeds 99999 or -99999 at instruction %d***\n"
-                           "***Simple language execution abnormally terminated***\n",*instructionCounter);
+                    printf("***Value in accumulator is out of the range [-99999,99999] at instruction %d***\n"
+                           "***SML language execution abnormally terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;
@@ -189,8 +189,8 @@ void execute(double *accumulator, int *instructionCounter, int *instructionRegis
                     pow(*accumulator, memory[*operand]) >= -99999)
                     (*accumulator) = pow(*accumulator, memory[*operand]);
                 else {
-                    printf("***Value in accumulator exceeds 99999 or -99999***\n"
-                           "***Simpletron execution abnormally terminated***\n");
+                    printf("***Value in accumulator is out of the range [-99999,99999] at instruction %d***\n"
+                           "***SML execution terminated***\n",*instructionCounter);
                     exit(0);
                 }
                 (*instructionCounter)++;

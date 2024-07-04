@@ -74,7 +74,7 @@ void conditionKeyword(char *tokenPtr)
         while (*findGoto == ' ') findGoto++; // Skip leading spaces
         strcpy(gotoLine, findGoto);
     } else {
-        printf("No 'goto' found in the if statement in line number %d.\n",lastValidLine);
+        printf("ERROR:No 'goto' found in the if statement in line number %d.\n",lastValidLine);
         expression[0] = '\0';  // Set to empty string
         gotoLine[0] = '\0';    // Set to empty string
         exit(1);
@@ -130,10 +130,17 @@ void letKeyword(char *tokenPtr)
 {
     //1) Put all symbols that are not in the symbol table
     tokenPtr=strtok(NULL,"=");
+
     int left_variable_location=returns_SML_location_from_SymbolTable(tokenPtr);
    //printf("Left variable %s with location %d\n",tokenPtr,left_variable_location);
-    if(left_variable_location==-1 )
+    if(left_variable_location==-1)
     {
+        if(!isValidVariable(tokenPtr))
+        {
+            printf("The variable after input keyword should be max 25 characters and should only contain letters"
+                   "->%s is not correct at line number %d",tokenPtr,lastValidLine);
+            exit(1);
+        }
         strcpy(SymbolTable[SymbolTableIndex].variable,tokenPtr);
         SymbolTable[SymbolTableIndex].type='V';
         SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
@@ -163,6 +170,12 @@ void letS(char *tokenPtr)
     //printf("Left variable %s with location %d\n",tokenPtr,left_variable_location);
     if(left_variable_location==-1 )
     {
+        if(!isValidVariable(tokenPtr))
+        {
+            printf("The variable after input keyword should be max 25 characters and should only contain letters"
+                   "->%s is not correct at line number %d",tokenPtr,lastValidLine);
+            exit(1);
+        }
         strcpy(SymbolTable[SymbolTableIndex].variable,tokenPtr);
         SymbolTable[SymbolTableIndex].type='S';
         SymbolTable[SymbolTableIndex++].location=SmlVariableIndexCounter--;
@@ -283,7 +296,7 @@ void gotoKeyword(char *tokenPtr)
 {
     tokenPtr= strtok(NULL," ");
     int line=returns_LineNum_location_from_SymbolTable(tokenPtr);
-    printf("Goto %d\n",line);
+    //printf("Goto %d\n",line);
     if(line==-1)
     {
         flags[SmlInstructionCounter] = atoi(tokenPtr);

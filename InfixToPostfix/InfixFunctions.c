@@ -37,7 +37,7 @@ void convertToPostfix(char *infix,char *postfix2[]) {
                 }
                 if(isdigit(infix[i])) //If next token is still a digit than we have crossed legth 20
                 {
-                    printf("A number at line %d is longer than 19 characters",lastValidLine);
+                    printf("ERROR:A number at line %d is longer than 19 characters",lastValidLine);
                     exit(1);
                 }
                 i--;
@@ -77,7 +77,7 @@ void convertToPostfix(char *infix,char *postfix2[]) {
                 //printf("About to handle %c\n",infix[i]);
                 if(infix[i]=='/' && infix[i+1]=='0')
                 {
-                    printf("Error: Possible attempt to divide by 0 at line number %d.\nPlease remove and leading redundant zeros\n",lastValidLine);
+                    printf("Error: Possible attempt to divide by 0 at line number %d.\nPlease remove any redundant leading zeros\n",lastValidLine);
                     exit(1);
                 }
                 if(precedence(infix[i], topPtr->data))

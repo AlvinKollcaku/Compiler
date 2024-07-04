@@ -71,25 +71,25 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
 ## Error Handling
 In each error case the line number where it occurred is shown.
 1) The form of each statement is validated. The following error messages can be shown:
-   Invalid keyword: ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/febdcc96-c1a1-4ae3-a70a-bc3278c90de4)
-   Missing goto in if statement: ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d764709b-0706-46b1-8f6b-70a92e619131)
+   Invalid keyword: ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/0bf16455-9e84-4cfb-9ae7-36505043b784)
+   Missing goto in if statement: ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/fd653578-57ed-4faa-bfb1-9538e3b9cadf)
 2) Line numbers should be >= 0 . The following error message will be shown:
-   ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/977bd160-92a7-4951-8185-05c51b7152d7)
+  ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/58d2ad86-3aa2-4957-aa0e-7f07ffbbb045)
 3) String literals should include no spaces and should each be writen in "" seperately. Example: "I am" and "I " "am" is wrong while "I" "am" is correct.They must be less than 11 chars since memory is very limited. Error message:
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d6accd13-a7c8-4dbe-a11e-35f71b66d73f)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/f8316f13-b7c9-4116-af93-0bae10bf4f54)
 4) Overflow errors:
-   ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/1822e34c-e8e1-4544-99db-e8e466a73e17)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/f14809d2-579f-476f-b447-1d14a3f499c2)
    If during calculations the range [-99999,99999] is exceeded that is reported at runtime:
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/137c61dc-9a83-40f2-98ca-934f289c30b4)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/50e7f4e1-c999-4aa2-b200-4d6427b01cb9)
 5) Divide by 0 attempts:
-   ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/5797205f-474d-4c51-9d43-889af7e04b54)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/f57905ea-6647-4886-8a24-0f2435752d52)
 6) A variable must not exceed length of 25 chars and must include only letters:
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/950c9ab2-a8e3-40db-919b-89b2b260e1ce)
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/36183fe4-d868-4e82-af1d-ea58898993e0)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/6a91c61e-1fe0-4787-9b59-450349396370)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/4b891476-ba04-45d5-9750-0641baa466a1)
 7)Numbers must not be longer than 19 characters
-   ![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/6f42e9c2-efcb-4ff4-a847-e006de4ee782)
+  ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d8d02447-7f0e-4321-bdf5-1bc6f29e667c)
 8)If the Simple program is too exceeds the 1000 word memory of SML an error will be thrown.
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/3be0269c-c7db-48a0-a1ec-30d7872577b1)
+  ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/2cff957f-f7d9-4fb7-9c78-fb8a45641d7c)
 
 -Logical errors will lead to undefined behaviour(e.g. using let instead of lets to initialze a string variable).
 
@@ -124,25 +124,15 @@ This table organizes the symbols used in the program, categorizing them by their
 
 ### Corresponding SML Program
 
-13999     // Write to console string in location 999
-13994     // Write to console string in location 994
-13993     // Write to console string in location 993
-14000     // Print NewLine
-10987     // Read and store in location 987
-20987     // Load value from location 987 into accumulator
-34986     // Value in accumulator % value in location 986
-21985     // Store value in accumulator in location 985
-20985     // Load value from location 985 into accumulator
-31984     // Value in accumulator - value in location 984
-45013     // Branch to location 13 if accumulator is zero
-13983     // Write to console string in location 983
-40014     // Branch to location 14
-13980     // Write to console string in location 980
-49000     // Halt program
+![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/9d3ff984-fb61-420b-94c5-4cfe93ac5977)
+
+### Output + Memory 
+![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d7d4f461-2003-43ce-953b-162a9ff57bb1)
+![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/5e016592-f77f-400c-a1ba-ffa234e1f70c)
 
 ### Explanation
 
-This program demonstrates basic flow control in the Simple language. Here's a breakdown of its functionality:
+This program demonstrates basic flow control in the Program. Here's a breakdown of its functionality:
 
 - **Printing Strings**: Lines 0-2 use the `print` keyword to output multiple strings: "Enter", "a", "number", followed by a newline (NL).
 - **Input**: Line 1 uses the `input` keyword to prompt the user for a numerical input, which is stored in the variable `number`.

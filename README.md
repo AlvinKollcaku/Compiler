@@ -91,40 +91,36 @@ In each error case the line number where it occurred is shown.
 
 - Logical errors will lead to undefined behaviour(e.g. using let instead of lets to initialze a string variable).
 
-Demo Program
-Programs Folder
-Some programs showcasing the power of the Simple language can be found in the Programs folder. The program HighestGrade.txt demonstrates all features of the language. Here, we'll explain a shorter program to give an idea of how the execution is performed.
+## Demo Program
 
-Program: Programs/EvenOrOdd.txt
-plaintext
-Code kopieren
-0 print "Enter" "a" "number" NL
-1 input number
-2 if number % 2 == 0 goto 5
-3 print "Odd"
-4 goto 6
-5 print "Even"
-6 end
-Symbol Table
-Symbol	Type	Location
-0	L	0
-"Enter"	S	999
-"a"	S	994
-"number"	S	993
-1	L	4
-number	V	987
-2	L	5
-2.00	C	986
-0.00	C	984
-3	L	11
-"Odd"	S	983
-4	L	12
-5	L	13
-"Even"	S	980
-6	L	14
-Corresponding SML Program
-plaintext
-Code kopieren
+Some programs showcasing the power of the Simple language can be found in the Programs folder. For example, **HighestGrade.txt** demonstrates all features of the language. Below, we'll explain a shorter program to illustrate how execution works:
+
+### Program: `Programs/EvenOrOdd.txt`
+
+### Symbol Table
+
+| Symbol   | Type | Location |
+|----------|------|----------|
+| 0        | L    | 0        |
+| "Enter"  | S    | 999      |
+| "a"      | S    | 994      |
+| "number" | S    | 993      |
+| 1        | L    | 4        |
+| number   | V    | 987      |
+| 2        | L    | 5        |
+| 2.00     | C    | 986      |
+| 0.00     | C    | 984      |
+| 3        | L    | 11       |
+| "Odd"    | S    | 983      |
+| 4        | L    | 12       |
+| 5        | L    | 13       |
+| "Even"   | S    | 980      |
+| 6        | L    | 14       |
+
+This table organizes the symbols used in the program, categorizing them by their type (L for line number, S for string, V for variable, and C for constant) and their respective memory locations. Each entry corresponds to an element utilized in the Simple language program described earlier.
+
+### Corresponding SML Program
+
 13999     // Write to console string in location 999
 13994     // Write to console string in location 994
 13993     // Write to console string in location 993
@@ -140,14 +136,22 @@ Code kopieren
 40014     // Branch to location 14
 13980     // Write to console string in location 980
 49000     // Halt program
-Explanation
-Everything is put into the symbol table. Variables are placed at the back of memory, starting at 999. The first variable is "Enter", which occupies 5 characters, so the next free spot is 994.
 
-While adding tokens to the symbol table, the compiler also generates the SML instructions. For the first line, after inserting the line number 0, the compiler encounters the print keyword, indicating that everything after it must be output to the screen. This is done using the operation code 13 + location for each token. The first three SML instructions use operation code 13, corresponding to the three string literals in the first print statement.
+### Explanation
 
-Upon reaching the if statement, the compiler converts each side into postfix notation for evaluation using SML. Thus, number % 2 == 0 becomes number 2 % == 0. To evaluate the left part, the number is loaded into an accumulator (a special register for algebraic operations) using 20=LOAD + location of number. The corresponding instruction to perform number % 2 is written in SML, and the result is stored in the next free variable location. The right side is similarly processed (in this case, no postfix conversion is needed). Finally, the left value is loaded into the accumulator, and the right value is subtracted. If the accumulator is zero, the program branches to instruction 13; otherwise, it continues with the next instruction.
+This program demonstrates basic flow control in the Simple language. Here's a breakdown of its functionality:
 
+- **Printing Strings**: Lines 0-2 use the `print` keyword to output multiple strings: "Enter", "a", "number", followed by a newline (NL).
+- **Input**: Line 1 uses the `input` keyword to prompt the user for a numerical input, which is stored in the variable `number`.
+- **Conditional Branching**: Line 2 checks if the value stored in `number` is even (`number % 2 == 0`). If true, the program jumps to line 5; otherwise, it continues to line 3.
+- **Output Based on Condition**: 
+  - If `number` is even, line 5 prints "Even".
+  - If `number` is odd, line 3 prints "Odd".
+- **End of Program**: Line 6 marks the end of the program execution.
 
+The symbol table provides a structured view of all symbols used in the program, including line numbers, variables (`number`), constants (`2.00`, `0.00`), and string literals (`"Enter"`, `"Odd"`, `"Even"`). Each symbol is categorized by type and mapped to its corresponding memory location, facilitating efficient compilation into the Simple Machine Language (SML).
+
+The corresponding SML program executes these operations in a simulated environment, reflecting the sequence of actions defined in the Simple language program.
 
 
 

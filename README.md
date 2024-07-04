@@ -3,11 +3,10 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
-3. [Language Keywords](#language-keywords)
+3. [Simple Language Keywords](#simple-language-keywords)
 4. [Scheme for the process](#scheme)
 5. [Error Handling](#error-handling)
-6. [Example Code](#example-code)
-7. [Demo Program](#demo-program)
+6. [Demo Program](#demo-program)
 
 ## Introduction
 This Compiler turns the "Simple" but powerful language with 10 keywords into an assembly-like Simple Machine Language (SML). The project consists of three main parts:
@@ -92,8 +91,66 @@ In each error case the line number where it occurred is shown.
 
 - Logical errors will lead to undefined behaviour(e.g. using let instead of lets to initialze a string variable).
 
-## Demo Program
-- Some programs that I have written, which showcase the power of the Simple language can be found in the Programs folder. The one that uses all features is HighestGrade.txt.
-- Here I will explain a much shorter program, just to give an idea how the conversion is done:
-- 
+Demo Program
+Programs Folder
+Some programs showcasing the power of the Simple language can be found in the Programs folder. The program HighestGrade.txt demonstrates all features of the language. Here, we'll explain a shorter program to give an idea of how the execution is performed.
+
+Program: Programs/EvenOrOdd.txt
+plaintext
+Code kopieren
+0 print "Enter" "a" "number" NL
+1 input number
+2 if number % 2 == 0 goto 5
+3 print "Odd"
+4 goto 6
+5 print "Even"
+6 end
+Symbol Table
+Symbol	Type	Location
+0	L	0
+"Enter"	S	999
+"a"	S	994
+"number"	S	993
+1	L	4
+number	V	987
+2	L	5
+2.00	C	986
+0.00	C	984
+3	L	11
+"Odd"	S	983
+4	L	12
+5	L	13
+"Even"	S	980
+6	L	14
+Corresponding SML Program
+plaintext
+Code kopieren
+13999     // Write to console string in location 999
+13994     // Write to console string in location 994
+13993     // Write to console string in location 993
+14000     // Print NewLine
+10987     // Read and store in location 987
+20987     // Load value from location 987 into accumulator
+34986     // Value in accumulator % value in location 986
+21985     // Store value in accumulator in location 985
+20985     // Load value from location 985 into accumulator
+31984     // Value in accumulator - value in location 984
+45013     // Branch to location 13 if accumulator is zero
+13983     // Write to console string in location 983
+40014     // Branch to location 14
+13980     // Write to console string in location 980
+49000     // Halt program
+Explanation
+Everything is put into the symbol table. Variables are placed at the back of memory, starting at 999. The first variable is "Enter", which occupies 5 characters, so the next free spot is 994.
+
+While adding tokens to the symbol table, the compiler also generates the SML instructions. For the first line, after inserting the line number 0, the compiler encounters the print keyword, indicating that everything after it must be output to the screen. This is done using the operation code 13 + location for each token. The first three SML instructions use operation code 13, corresponding to the three string literals in the first print statement.
+
+Upon reaching the if statement, the compiler converts each side into postfix notation for evaluation using SML. Thus, number % 2 == 0 becomes number 2 % == 0. To evaluate the left part, the number is loaded into an accumulator (a special register for algebraic operations) using 20=LOAD + location of number. The corresponding instruction to perform number % 2 is written in SML, and the result is stored in the next free variable location. The right side is similarly processed (in this case, no postfix conversion is needed). Finally, the left value is loaded into the accumulator, and the right value is subtracted. If the accumulator is zero, the program branches to instruction 13; otherwise, it continues with the next instruction.
+
+
+
+
+
+
+
 

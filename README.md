@@ -1,4 +1,4 @@
-# Simple Language to Assembly Compiler ![Compiler](https://github.com/AlvinKollcaku/Compiler/assets/142890850/e5d5a7c9-5b3f-4ee9-8ff9-99530a159628)
+# Simple Language to Assembly Compiler ![💻 Compiler](https://github.com/AlvinKollcaku/Compiler/assets/142890850/def1d7a8-80ea-400d-a689-97aec3a09145)
 
 ## Table of Contents
 1. [Introduction](#introduction)

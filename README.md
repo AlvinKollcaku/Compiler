@@ -17,6 +17,8 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
    - Simpletron has a 1000-word memory, with each word referenced by locations 0 through 999.
    - Each SML instruction occupies one word of Simpletron's memory. The first two digits are the operation code, and the last three digits correspond to the memory location for the operation.
    - Example: `10999` means **READ** a value from the user and store it in location 999.
+   - Numerical values occupy 1 cell in the memory
+   - **Strings** occupy mulitple memory cells, where in each cell a char of the corresponding string is stored. In the cell where the first char is stored the lenght of the string is also stored.
    - For detailed operation codes, see `SML/SML.txt`.
 
 2. **Infix to Postfix Converter**
@@ -49,8 +51,6 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
 - List of key features of the compiler
   - Converts simple language to the assembly like Simple machine language (SML)
   - Supports comments, string and numerical variable initialization, printing, conditional jumps, loops , subroutines (functions)
-  - Strings occupy mulitple memory cells, where in each cell a char of the corresponding string is stored. In the cell where the first char is stored the lenght of the
-    string is also stored.
     
 ## Simple Language Keywords
 - Detailed description of each keyword
@@ -109,7 +109,7 @@ This table organizes the symbols used in the program, categorizing them by their
 
 ### Corresponding SML Program
 
-![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/9d3ff984-fb61-420b-94c5-4cfe93ac5977)
+![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/47557b8c-03eb-472a-b9c8-07d566dcfefe)
 
 ### Output  
 ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/a7cbd24d-a2ff-4398-8d6c-d13629c9c12b)

@@ -7,6 +7,8 @@
 4. [Scheme for the process](#scheme-for-the-process)
 5. [Error Handling](#error-handling)
 6. [Demo Program](#demo-program)
+7. [License](#license)
+
 
 ## Introduction
 This Compiler turns the "Simple" but powerful language with 10 keywords into an assembly-like Simple Machine Language (SML). The project consists of three main parts:
@@ -126,7 +128,7 @@ This table organizes the symbols used in the program, categorizing them by their
 
 This program demonstrates basic flow control in the Program. Here's a breakdown of its functionality:
 
-- **Printing Strings**: Lines 0-2 use the `print` keyword to output multiple strings: "Enter", "a", "number", followed by a newline (NL).
+- **Printing Strings**: First line uses the `print` keyword to output multiple strings: "Enter", "a", "number", followed by a newline (NL).
                        In SML it corresponds to 4 instructions. 3 to print each string and one for the newline.
 - **Input**: Line 1 uses the `input` keyword to prompt the user for a numerical input, which is stored in the variable `number`.
              Corresponds to 1 instruction in SML.
@@ -143,6 +145,10 @@ This program demonstrates basic flow control in the Program. Here's a breakdown 
 The symbol table provides a structured view of all symbols used in the program, including line numbers, variables (`number`), constants (`2.00`, `0.00`), and string literals (`"Enter"`, `"Odd"`, `"Even"`). Each symbol is categorized by type and mapped to its corresponding memory location.
 
 The corresponding SML program executes these operations in a simulated environment, reflecting the sequence of actions defined in the Simple language program.  
+
+## License
+
+This project is licensed under the GNU General Public License v3.0. You can redistribute it and/or modify it under the terms of the GPL-3.0 license.
 
 
 

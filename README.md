@@ -49,7 +49,8 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
 - List of key features of the compiler
   - Converts simple language to the assembly like Simple machine language (SML)
   - Supports comments, string and numerical variable initialization, printing, conditional jumps, loops , subroutines (functions)
-  - Strings occupy mulitple memory cells, where in each cell a char of the corresponding string is stored
+  - Strings occupy mulitple memory cells, where in each cell a char of the corresponding string is stored. In the cell where the first char is stored the lenght of the
+    string is also stored.
     
 ## Simple Language Keywords
 - Detailed description of each keyword
@@ -80,12 +81,12 @@ In each error case the line number where it occurred is shown.
 4) Overflow errors:
    ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/f14809d2-579f-476f-b447-1d14a3f499c2)
    If during calculations the range [-99999,99999] is exceeded that is reported at runtime:
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/50e7f4e1-c999-4aa2-b200-4d6427b01cb9)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/9a82cc18-1ce7-46d7-89e3-375f7392ceed)
 5) Divide by 0 attempts:
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/f57905ea-6647-4886-8a24-0f2435752d52)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/af15e55e-5a30-449a-aeae-ea8c69f9e9f3)
 6) A variable must not exceed length of 25 chars and must include only letters:
    ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/6a91c61e-1fe0-4787-9b59-450349396370)
-   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/4b891476-ba04-45d5-9750-0641baa466a1)
+   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/95665f86-5aa3-4f61-8a8a-de21f24a6da6)
 7)Numbers must not be longer than 19 characters
   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d8d02447-7f0e-4321-bdf5-1bc6f29e667c)
 8)If the Simple program is too exceeds the 1000 word memory of SML an error will be thrown.
@@ -102,23 +103,7 @@ Some programs showcasing the power of the Simple language can be found in the Pr
 
 ### Symbol Table 
 
-| Symbol   | Type | Location |
-|----------|------|----------|
-| 0        | L    | 0        |
-| "Enter"  | S    | 999      |
-| "a"      | S    | 994      |
-| "number" | S    | 993      |
-| 1        | L    | 4        |
-| number   | V    | 987      |
-| 2        | L    | 5        |
-| 2.00     | C    | 986      |
-| 0.00     | C    | 984      |
-| 3        | L    | 11       |
-| "Odd"    | S    | 983      |
-| 4        | L    | 12       |
-| 5        | L    | 13       |
-| "Even"   | S    | 980      |
-| 6        | L    | 14       |
+![carbon (1)](https://github.com/AlvinKollcaku/Compiler/assets/142890850/9605bfd5-4d5a-418d-93f6-5ec59b47d3a4)
 
 This table organizes the symbols used in the program, categorizing them by their type (L for line number, S for string, V for variable, and C for constant) and their respective memory locations. Each entry corresponds to an element utilized in the Simple language program described earlier.
 

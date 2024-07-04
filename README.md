@@ -19,7 +19,13 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
    - Example: `10999` means **READ** a value from the user and store it in location 999.
    - Numerical values occupy 1 cell in the memory
    - **Strings** occupy mulitple memory cells, where in each cell a char of the corresponding string is stored. In the cell where the first char is stored the length of the string is also stored.
-
+   - There are 4 registers used in the language simulator:
+   accumulator - special register in which information is put for Simpletron to use in calculations or examine it
+   instructionCounter - will hold the current instruction number
+   instructionRegister - will hold the current instruction (operationCode + operand)
+   operationCode - will hold the first 2 digits of the instruction being executed
+   operand - will hold the last 2 digits of the instruction being executed
+   
 2. **Infix to Postfix Converter**
    - Converts complex infix expressions (e.g., `2+3`) into postfix (e.g., `2 3 +`) to be evaluated in SML.
    - Postfix expressions are converted to SML instructions using a stack-based evaluation.

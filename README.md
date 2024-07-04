@@ -11,15 +11,14 @@
 ## Introduction
 This Compiler turns the "Simple" but powerful language with 10 keywords into an assembly-like Simple Machine Language (SML). The project consists of three main parts:
 
-1. **The Virtual Machine: Simpletron (SML folder)**
+1. **The Virtual Machine: Simpletron**
    - Simpletron is a virtual machine that runs programs written in SML.
    - It handles all information in terms of **words**, which are signed 5-digit decimal numbers (e.g., +10999).
    - Simpletron has a 1000-word memory, with each word referenced by locations 0 through 999.
    - Each SML instruction occupies one word of Simpletron's memory. The first two digits are the operation code, and the last three digits correspond to the memory location for the operation.
    - Example: `10999` means **READ** a value from the user and store it in location 999.
    - Numerical values occupy 1 cell in the memory
-   - **Strings** occupy mulitple memory cells, where in each cell a char of the corresponding string is stored. In the cell where the first char is stored the lenght of the string is also stored.
-   - For detailed operation codes, see `SML/SML.txt`.
+   - **Strings** occupy mulitple memory cells, where in each cell a char of the corresponding string is stored. In the cell where the first char is stored the length of the string is also stored.
 
 2. **Infix to Postfix Converter**
    - Converts complex infix expressions (e.g., `2+3`) into postfix (e.g., `2 3 +`) to be evaluated in SML.
@@ -89,7 +88,7 @@ In each error case the line number where it occurred is shown.
    ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/95665f86-5aa3-4f61-8a8a-de21f24a6da6)
 7)Numbers must not be longer than 19 characters
   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/d8d02447-7f0e-4321-bdf5-1bc6f29e667c)
-8)If the Simple program is too exceeds the 1000 word memory of SML an error will be thrown.
+8)If the Simple program is exceeds the 1000 word memory of SML an error will be thrown.
   ![carbon](https://github.com/AlvinKollcaku/Compiler/assets/142890850/2cff957f-f7d9-4fb7-9c78-fb8a45641d7c)
 
 -Logical errors will lead to undefined behaviour(e.g. using let instead of lets to initialze a string variable).

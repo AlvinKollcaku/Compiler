@@ -67,7 +67,7 @@ This Compiler turns the "Simple" but powerful language with 10 keywords into an 
   - `letS`: String variable initialization
   - `let`: Numerical variable initialization
   - `print`: Print variables, string literals, and numerical constants
-  - `if expression goto`: Conditional jump
+  - `if <expression> goto`: Conditional jump
   - `goto`: Unconditional jump
   - `NL`: Newline
   - `end`: End of the program

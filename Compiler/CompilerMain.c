@@ -21,7 +21,6 @@
 #include<string.h>
 #include<stdbool.h>
 #include "CompilerHeader.h"
-#include "C:\Users\alvin\OneDrive\Desktop\MiniCompilerFinal\InfixToPostfix\InfixHeader.h"
 
 double SML[1000] = {0};// will hold the SML program
 int SmlInstructionCounter = 0;
@@ -44,7 +43,7 @@ int main() {
 
     //READING THE SIMPLE PROGRAM FROM THE FILE
     FILE *infile = NULL;
-    infile = fopen("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\Compiler\\Simple.txt", "r");
+    infile = fopen("Compiler\\Simple.txt", "r");
     if (infile == NULL) {
         perror("Unable to open the file");
         return 1;
@@ -127,7 +126,7 @@ int main() {
 
                     SML[SmlInstructionCounter] = 49000;
 
-                    writeArrayToFile("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\SML\\Program.txt",SML,1000);
+                    writeArrayToFile("MiniCompilerFinal\\SML\\Program.txt",SML,1000);
                     printSymbolTable();
                     printSML();
 

@@ -67,3 +67,11 @@
 25	104	7418343806267256	CMakeFiles/MiniCompilerFinal.dir/SML/SML_main.c.obj	71698d04bbb2b1f9
 31	135	7418343806331906	CMakeFiles/MiniCompilerFinal.dir/SML/SML_functions.c.obj	8d61fa8748fdd2db
 135	239	7418343807372897	MiniCompilerFinal.exe	5acc0488a41d7014
+64	454	7418439865453982	CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerMain.c.obj	19476f67a7da9dde
+455	891	7418439869365956	MiniCompilerFinal.exe	5acc0488a41d7014
+24	120	7418439960743921	CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerMain.c.obj	19476f67a7da9dde
+121	225	7418439961713079	MiniCompilerFinal.exe	5acc0488a41d7014
+20	242	7418441100327741	CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerMain.c.obj	19476f67a7da9dde
+242	349	7418441102542884	MiniCompilerFinal.exe	5acc0488a41d7014
+45	495	7420997677853003	CMakeFiles/MiniCompilerFinal.dir/Compiler/CompilerMain.c.obj	19476f67a7da9dde
+496	920	7420997682359818	MiniCompilerFinal.exe	5acc0488a41d7014

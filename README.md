@@ -7,7 +7,8 @@
 4. [Scheme for the process](#scheme-for-the-process)
 5. [Error Handling](#error-handling)
 6. [Demo Program](#demo-program)
-7. [License](#license)
+7. [How to run it](#how-to-run-it)
+8. [License](#license)
 
 
 ## Introduction
@@ -145,6 +146,9 @@ This program demonstrates basic flow control in the Program. Here's a breakdown 
 The symbol table provides a structured view of all symbols used in the program, including line numbers, variables (`number`), constants (`2.00`, `0.00`), and string literals (`"Enter"`, `"Odd"`, `"Even"`). Each symbol is categorized by type and mapped to its corresponding memory location.
 
 The corresponding SML program executes these operations in a simulated environment, reflecting the sequence of actions defined in the Simple language program.  
+
+## How to run it
+The main function is Compiler/CompilerMain.c . The Simple program that is being compiled is in the Simple.txt file. You can simply write a program there yourself or can copy one from the Programs folder. I have put relative paths for the Simple.txt file, where the program will be read from, and for the SML.txt file, where the corresponding SML program will be written. If these files can't be opened try putting the absolute paths and it should work.
 
 ## License
 

@@ -73,7 +73,7 @@ int main() {
         bool LineNumber = true; //Will be turned to False after first token
 
         //Will process a single row
-        while (tokenPtr != NULL) //assuming everything is written in lowerCase
+        while (tokenPtr != NULL) 
         {
             remove_newline(tokenPtr);
             //in the symbol table

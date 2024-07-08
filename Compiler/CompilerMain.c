@@ -138,7 +138,8 @@ int main() {
                             &operationCode, &operand, memory);
                     dump(accumulator, instructionCounter, instructionRegister,
                          operationCode, operand, memory);
-                    exit(0);
+                    fclose(infile);
+                   return 0;
 
                 }
             } else {
@@ -152,10 +153,6 @@ int main() {
     }
 
     fclose(infile);
-
-    printSymbolTable(SymbolTable, SymbolTableIndex);
-    printSML();
-    printFlagsArray();
 
     return 0;
 }

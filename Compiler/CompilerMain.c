@@ -45,7 +45,7 @@ int main() {
     FILE *infile = NULL;
     infile = fopen("Compiler\\Simple.txt", "r");
     if (infile == NULL) {
-        perror("Unable to open the file");
+        perror("Unable to open the file at Compiler/CompilerMain.c line 46");
         return 1;
     }
 

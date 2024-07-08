@@ -148,7 +148,7 @@ The symbol table provides a structured view of all symbols used in the program, 
 The corresponding SML program executes these operations in a simulated environment, reflecting the sequence of actions defined in the Simple language program.  
 
 ## How to run it
-The main function is Compiler/CompilerMain.c . The Simple program that is being compiled is in the Simple.txt file. You can simply write a program there yourself or can copy one from the Programs folder. I have put relative paths for the Simple.txt file, where the program will be read from, and for the SML.txt file, where the corresponding SML program will be written. If these files can't be opened try putting the absolute paths and it should work.
+The main function is in Compiler/CompilerMain.c . The Simple program that is being compiled is in the Simple.txt file. You can simply write a program there yourself or can copy one from the Programs folder. I have put relative paths for the Simple.txt file, where the program will be read from, and for the SML.txt file, where the corresponding SML program will be written. If these files can't be opened try putting the absolute paths and it should work. 
 
 ## License
 

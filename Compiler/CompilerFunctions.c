@@ -131,11 +131,12 @@ void printSML() {
     puts("");
     puts("-----------------------------------");
     puts("Printing the SML program");
+    puts("\nLocation Instruction\tExplanation");
 
     for (int i = 0; i <= SmlInstructionCounter; i++) {
         if (SML[i] == 0)
             break;
-        printf("%.0lf\t", SML[i]);
+        printf("%d\t%.0lf\t",i, SML[i]);
 
         switch ((int) SML[i] / 1000) {
             case 10:

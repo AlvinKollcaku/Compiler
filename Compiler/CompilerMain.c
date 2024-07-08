@@ -126,7 +126,7 @@ int main() {
 
                     SML[SmlInstructionCounter] = 49000;
 
-                    writeArrayToFile("MiniCompilerFinal\\SML\\Program.txt",SML,1000);
+                    writeArrayToFile("SML\\Program.txt",SML,1000);
                     printSymbolTable();
                     printSML();
 

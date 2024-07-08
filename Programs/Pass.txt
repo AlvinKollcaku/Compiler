@@ -1,0 +1,8 @@
+1 print "Will" "you" "pass" "?" NL
+2 print "Enter" "test" "score" ":"
+3 input score
+4 if score < 5 goto 7
+5 print "Yes"
+6 goto 10
+7 print "No"
+10 end

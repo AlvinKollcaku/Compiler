@@ -45,7 +45,7 @@ int main() {
     FILE *infile = NULL;
     infile = fopen("Compiler\\Simple.txt", "r");
     if (infile == NULL) {
-        perror("Unable to open the file");
+        perror("Unable to open Simple.txt. Compiler/CompilerMain.c line 46");
         return 1;
     }
 
@@ -73,7 +73,7 @@ int main() {
         bool LineNumber = true; //Will be turned to False after first token
 
         //Will process a single row
-        while (tokenPtr != NULL) //assuming everything is written in lowerCase
+        while (tokenPtr != NULL)
         {
             remove_newline(tokenPtr);
             //in the symbol table
@@ -138,8 +138,9 @@ int main() {
                             &operationCode, &operand, memory);
                     dump(accumulator, instructionCounter, instructionRegister,
                          operationCode, operand, memory);
-                    exit(0);
+                    fclose(infile);
 
+                    return 0;
                 }
             } else {
                 printf("ERROR: \"%s\" is invalid token at line number %d\n", tokenPtr, lastValidLine);
@@ -152,10 +153,6 @@ int main() {
     }
 
     fclose(infile);
-
-    printSymbolTable(SymbolTable, SymbolTableIndex);
-    printSML();
-    printFlagsArray();
 
     return 0;
 }

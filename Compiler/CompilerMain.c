@@ -45,11 +45,7 @@ int main() {
     FILE *infile = NULL;
     infile = fopen("Compiler\\Simple.txt", "r");
     if (infile == NULL) {
-<<<<<<< HEAD
         perror("Unable to open Simple.txt. Compiler/CompilerMain.c line 46");
-=======
-        perror("Unable to open the file at Compiler/CompilerMain.c line 46");
->>>>>>> 16f9cf1b23b3acbf8713bef3fbc6c168d625f407
         return 1;
     }
 
@@ -76,12 +72,8 @@ int main() {
 
         bool LineNumber = true; //Will be turned to False after first token
 
-        //Will process a single row
-<<<<<<< HEAD
+
         while (tokenPtr != NULL)
-=======
-        while (tokenPtr != NULL) 
->>>>>>> 16f9cf1b23b3acbf8713bef3fbc6c168d625f407
         {
             remove_newline(tokenPtr);
             //in the symbol table
@@ -147,10 +139,6 @@ int main() {
                     dump(accumulator, instructionCounter, instructionRegister,
                          operationCode, operand, memory);
                     fclose(infile);
-<<<<<<< HEAD
-=======
-                   return 0;
->>>>>>> 16f9cf1b23b3acbf8713bef3fbc6c168d625f407
 
                     return 0;
                 }

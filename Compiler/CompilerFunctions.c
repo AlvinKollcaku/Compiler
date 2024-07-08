@@ -300,11 +300,7 @@ bool isValidStringLiteral(char *var) {
 void writeArrayToFile(const char *filename, double *array, size_t size) {
     FILE *file = fopen(filename, "w");
     if (file == NULL) {
-<<<<<<< HEAD
         perror("Failed to open SML.txt. Compiler/CompilerFunctions.c/writeArrayToFile() line 300");
-=======
-        perror("Failed to open file at Compiler/CompilerMain.c calling Compiler/CompilerFunctions.c/writeArrayToFile() line 300");
->>>>>>> 16f9cf1b23b3acbf8713bef3fbc6c168d625f407
         return;
     }
 

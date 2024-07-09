@@ -43,7 +43,7 @@ int main() {
 
     //READING THE SIMPLE PROGRAM FROM THE FILE
     FILE *infile = NULL;
-    infile = fopen("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\Compiler\\Simple.txt", "r");
+    infile = fopen("Compiler\\Simple.txt", "r");
     if (infile == NULL) {
         perror("Unable to open Simple.txt. Compiler/CompilerMain.c line 46");
         return 1;
@@ -126,7 +126,7 @@ int main() {
 
                     SML[SmlInstructionCounter] = 49000;
 
-                    writeArrayToFile("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\SML\\Program.txt",SML,1000);
+                    writeArrayToFile("MiniCompilerFinal\\SML\\Program.txt",SML,1000);
                     printSymbolTable();
                     printSML();
 

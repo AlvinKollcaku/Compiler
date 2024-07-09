@@ -5,6 +5,9 @@ Line numbers must appear in ascending order
 Each instruction begins with one of the following commands:
 rem , input, let, print, goto, if...goto or end
 
+!Note: The maximum line length in the Simple file should not be more than 300 chars
+Variables can consists only of letters
+
 The language
 ----------------------------------------------
 Command    |  Example statement     |   Description
@@ -29,9 +32,10 @@ Additional Rules
 Simple does not have variable declaration - merely mentioning a variable name declares the variable and initializes it to 0
 Simple's syntax allows only string input and output -> Not comparison
 The following relational and equality operators <,>,<=,>=,== or != are valid in if..goto statement
-Maximum length of variables is 30 chars
+Maximum length of variables is 25 chars
 For string inputs the maximum string length is 10 characters -> if the string exceeds length 10 the rest of the characters will be truncated
 If the length of the inputted string is less than 10 chars it does not matter for the memory because there will always be 10 places reserved-> imitating malloc(10) implicitly
+String literals can also be max of 10 chars in order to save memory -> use abbreviations if needed and explain in rem statements
 ---------------------------------------------------
 ->The compiler will read a file containing the Simple program and will compile it into SML code
 and then writes it one instruction per line to a text file.

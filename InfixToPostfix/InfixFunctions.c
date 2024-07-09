@@ -48,7 +48,7 @@ void convertToPostfix(char *infix,char *postfix2[]) {
             // If the current character is a digit
         //printf("Current %c\n",infix[i]);
             if (isdigit(infix[i])) {
-                char number[20]; //max number of digits is 19 -> TODO check in syntax analyser
+                char number[20]; //max number of digits is 19
                 int numIndex = 0;
                 // Collecting the full number
                 while ((isdigit(infix[i])||infix[i]=='.')&&numIndex<19) {

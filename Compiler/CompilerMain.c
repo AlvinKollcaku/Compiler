@@ -24,7 +24,7 @@
 
 double SML[1000] = {0};// will hold the SML program
 int SmlInstructionCounter = 0;
-int SmlVariableIndexCounter = 999; //TODO check if SMLInstructioncounter > SMLVairableIndexCounter -> raise "out of memory error"
+int SmlVariableIndexCounter = 999;
 int flags[1000]; //flags array has the same size as SML because the index of the incomplete instruction
 //in flags array will correspond to the index in SML array for the particular instruction
 
@@ -43,7 +43,7 @@ int main() {
 
     //READING THE SIMPLE PROGRAM FROM THE FILE
     FILE *infile = NULL;
-    infile = fopen("Compiler\\Simple.txt", "r");
+    infile = fopen("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\Compiler\\Simple.txt", "r");
     if (infile == NULL) {
         perror("Unable to open Simple.txt. Compiler/CompilerMain.c line 46");
         return 1;
@@ -126,7 +126,7 @@ int main() {
 
                     SML[SmlInstructionCounter] = 49000;
 
-                    writeArrayToFile("SML\\Program.txt",SML,1000);
+                    writeArrayToFile("C:\\Users\\alvin\\OneDrive\\Desktop\\MiniCompilerFinal\\SML\\Program.txt",SML,1000);
                     printSymbolTable();
                     printSML();
 

@@ -26,17 +26,16 @@
 
 struct tableEntry
 {
-    char variable[30];//This is for string variables->everything could have been stored here but since it
-                    //was added later it need changes
-    double symbol;//ASCII value of var, constant or line num
-    char type;//'C'=Numerical_Constant 'L'=line_number 'V'=Variable 'S'=String_Literal
+    char variable[30];//variable name or string literal
+    double symbol;//constant or line num
+    char type;//'C'=Numerical_Constant 'L'=line_number 'V'=Variable 'S'=String_Literal or StringVariable
     int location;//0 to 99 -> SMLs memory location associated with the symbol
     //char[20] command;
 };
 
 extern double SML[1000];// will hold the SML program
 extern int SmlInstructionCounter;
-extern int SmlVariableIndexCounter; //TODO check if SMLInstrcutioncounter > SMLVairableIndexCounter -> raise "out of memory error"
+extern int SmlVariableIndexCounter;
 extern int flags[1000]; //flags array has the same size as SML because the index of the incomplete instruction
 //in flags array will correspond to the index in SML array for the particular instruction
 
